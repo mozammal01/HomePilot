@@ -35,7 +35,19 @@
       "Read(//tmp/**)",
       "Bash(sed -i 's/localhost:3000/localhost:3001/g' verify-hero.js)",
       "Bash(sed -i 's/getByRole\\(\"link\", { name: \\\\/start free trial\\\\/i }\\)/getByRole\\(\"button\", { name: \\\\/start free trial\\\\/i }\\)/' verify-hero.js)",
-      "Bash(node check-tabindex.js)"
+      "Bash(node check-tabindex.js)",
+      "Bash(node verify-sections.js)",
+      "Bash(curl -sf http://localhost:3010 -o /tmp/prodresp.html -w \"HTTP %{http_code}\\\\n\")",
+      "Bash(rm -rf .next)",
+      "Bash(sed 's/localhost:3003/localhost:3010/' mobile-counter-check.js)",
+      "Bash(node mobile-counter-check-prod.js)",
+      "Bash(curl -sf http://localhost:3010 -o /dev/null -w \"HTTP %{http_code}\\\\n\")",
+      "Bash(sed -i 's/waitUntil: \"networkidle\"/waitUntil: \"load\"/' mobile-counter-check-prod.js)",
+      "Bash(curl -sf http://localhost:3003 -o /dev/null -w \"dev server HTTP %{http_code}\\\\n\")",
+      "Bash(tail -30 /tmp/devlog4.txt 2>&1)",
+      "Bash(sed 's/localhost:3003/localhost:3010/' verify-sections.js)",
+      "Bash(node verify-sections-prod.js)",
+      "Bash(sed -i 's/waitUntil: \"networkidle\"/waitUntil: \"load\"/g' verify-sections-prod.js)"
     ]
   }
 }
