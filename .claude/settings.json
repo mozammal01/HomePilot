@@ -26,7 +26,16 @@
       "Bash(node diagnose-scroll.js)",
       "Bash(node diagnose-scroll2.js)",
       "Bash(node diagnose-scroll3.js)",
-      "Bash(node diagnose-keyboard.js)"
+      "Bash(node diagnose-keyboard.js)",
+      "Bash(npx --yes shadcn@latest add badge -y)",
+      "Bash(npx --yes prettier --version)",
+      "Bash(npx --yes prettier --write src/components/sections/hero/*.tsx)",
+      "Bash(node verify-hero.js)",
+      "Bash(cat /tmp/devlog3.txt 2>&1 | tail -40)",
+      "Read(//tmp/**)",
+      "Bash(sed -i 's/localhost:3000/localhost:3001/g' verify-hero.js)",
+      "Bash(sed -i 's/getByRole\\(\"link\", { name: \\\\/start free trial\\\\/i }\\)/getByRole\\(\"button\", { name: \\\\/start free trial\\\\/i }\\)/' verify-hero.js)",
+      "Bash(node check-tabindex.js)"
     ]
   }
 }

@@ -4,7 +4,7 @@ export const siteConfig = {
   name: "HomePilot",
   tagline: "Your Smart Property Management Partner.",
   description:
-    "HomePilot is a premium property management platform that helps teams run reservations, operations, and guest experience from one place.",
+    "HomePilot is a premium property management platform that helps landlords, property managers, and real estate businesses manage properties, tenants, rent, and maintenance from one intelligent dashboard.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.homepilot.com",
   ogImage: "/og.png",
   links: {
@@ -14,6 +14,7 @@ export const siteConfig = {
   auth: {
     login: "/login",
     getStarted: "/get-started",
+    demo: "/demo",
   },
   nav: [
     { label: "Home", href: "/" },

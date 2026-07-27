@@ -1,9 +1,13 @@
+import { Hero } from "@/components/sections/hero";
+import { SuccessMetrics } from "@/components/sections/metrics";
+import { TrustedCompanies } from "@/components/sections/trusted";
+
 export default function Home() {
   return (
-    <main className="flex flex-1 items-center justify-center">
-      <p className="text-muted-foreground text-sm">
-        Project foundation ready.
-      </p>
+    <main className="flex flex-1 flex-col">
+      <Hero />
+      <TrustedCompanies />
+      <SuccessMetrics />
     </main>
   );
 }
