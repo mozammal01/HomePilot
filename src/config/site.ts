@@ -1,15 +1,29 @@
+import type { NavItem } from "@/types";
+
 export const siteConfig = {
-  name: "AmazePMS",
-  tagline: "Property management, simplified.",
+  name: "HomePilot",
+  tagline: "Your Smart Property Management Partner.",
   description:
-    "AmazePMS is a modern property management system that helps hospitality teams run reservations, front desk, and operations from one platform.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.amazepms.com",
+    "HomePilot is a premium property management platform that helps teams run reservations, operations, and guest experience from one place.",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.homepilot.com",
   ogImage: "/og.png",
   links: {
     twitter: "",
     linkedin: "",
   },
-  nav: [] as { label: string; href: string }[],
+  auth: {
+    login: "/login",
+    getStarted: "/get-started",
+  },
+  nav: [
+    { label: "Home", href: "/" },
+    { label: "Features", href: "#features" },
+    { label: "Solutions", href: "#solutions" },
+    { label: "Pricing", href: "#pricing" },
+    { label: "Testimonials", href: "#testimonials" },
+    { label: "FAQ", href: "#faq" },
+    { label: "Contact", href: "#contact" },
+  ] satisfies NavItem[],
 } as const;
 
 export type SiteConfig = typeof siteConfig;

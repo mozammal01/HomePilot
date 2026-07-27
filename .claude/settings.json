@@ -13,7 +13,20 @@
       "Bash(npx tsc *)",
       "Bash(npm run *)",
       "Bash(git init *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(chromium-cli --help)",
+      "Bash(npx --yes playwright --version)",
+      "Bash(node -e ' *)",
+      "Bash(mkdir -p /c/Users/itspr/AppData/Local/Temp/claude/d--Mozammal-Projects-HomePilot/11115e37-ca64-426d-99da-bf478b1a18c8/scratchpad)",
+      "Read(//c/Users/itspr/AppData/Local/Temp/claude/d--Mozammal-Projects-HomePilot/11115e37-ca64-426d-99da-bf478b1a18c8/scratchpad/**)",
+      "Bash(npm init *)",
+      "Bash(npx playwright *)",
+      "Bash(node verify-navbar.js)",
+      "Bash(node diagnose-mobile-menu.js)",
+      "Bash(node diagnose-scroll.js)",
+      "Bash(node diagnose-scroll2.js)",
+      "Bash(node diagnose-scroll3.js)",
+      "Bash(node diagnose-keyboard.js)"
     ]
   }
 }
