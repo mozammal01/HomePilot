@@ -1,6 +1,7 @@
 import { Hero } from "@/components/sections/hero";
 import { SuccessMetrics } from "@/components/sections/metrics";
 import { TrustedCompanies } from "@/components/sections/trusted";
+import { WhyHomePilot } from "@/components/sections/why-homepilot";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <Hero />
       <TrustedCompanies />
       <SuccessMetrics />
+      <WhyHomePilot />
     </main>
   );
 }

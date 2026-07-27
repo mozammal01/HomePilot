@@ -47,7 +47,9 @@
       "Bash(tail -30 /tmp/devlog4.txt 2>&1)",
       "Bash(sed 's/localhost:3003/localhost:3010/' verify-sections.js)",
       "Bash(node verify-sections-prod.js)",
-      "Bash(sed -i 's/waitUntil: \"networkidle\"/waitUntil: \"load\"/g' verify-sections-prod.js)"
+      "Bash(sed -i 's/waitUntil: \"networkidle\"/waitUntil: \"load\"/g' verify-sections-prod.js)",
+      "Bash(node verify-why.js)",
+      "Bash(sed -i 's/await page.getByText\\(\"Rent Collected\"\\).scrollIntoViewIfNeeded\\(\\);/await page.evaluate\\(\\(\\) => { const el = Array.from\\(document.querySelectorAll\\(\"p\"\\)\\).find\\(\\(p\\) => p.textContent === \"Rent Collected\"\\); el?.scrollIntoView\\({ block: \"center\" }\\); }\\);/' verify-why.js)"
     ]
   }
 }
