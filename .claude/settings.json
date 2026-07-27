@@ -49,7 +49,8 @@
       "Bash(node verify-sections-prod.js)",
       "Bash(sed -i 's/waitUntil: \"networkidle\"/waitUntil: \"load\"/g' verify-sections-prod.js)",
       "Bash(node verify-why.js)",
-      "Bash(sed -i 's/await page.getByText\\(\"Rent Collected\"\\).scrollIntoViewIfNeeded\\(\\);/await page.evaluate\\(\\(\\) => { const el = Array.from\\(document.querySelectorAll\\(\"p\"\\)\\).find\\(\\(p\\) => p.textContent === \"Rent Collected\"\\); el?.scrollIntoView\\({ block: \"center\" }\\); }\\);/' verify-why.js)"
+      "Bash(sed -i 's/await page.getByText\\(\"Rent Collected\"\\).scrollIntoViewIfNeeded\\(\\);/await page.evaluate\\(\\(\\) => { const el = Array.from\\(document.querySelectorAll\\(\"p\"\\)\\).find\\(\\(p\\) => p.textContent === \"Rent Collected\"\\); el?.scrollIntoView\\({ block: \"center\" }\\); }\\);/' verify-why.js)",
+      "Bash(node verify-features.js)"
     ]
   }
 }
