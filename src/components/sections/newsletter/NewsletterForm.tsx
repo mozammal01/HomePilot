@@ -35,6 +35,8 @@ export function NewsletterForm() {
         {subscribed ? (
           <motion.div
             key="success"
+            role="status"
+            aria-live="polite"
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
@@ -42,7 +44,7 @@ export function NewsletterForm() {
             className="flex items-center justify-center gap-2.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-5 py-3 text-sm font-medium text-emerald-600 dark:text-emerald-400"
           >
             <CheckCircle2 className="size-4 shrink-0" aria-hidden="true" />
-            You're subscribed — welcome aboard!
+            You&apos;re subscribed — welcome aboard!
           </motion.div>
         ) : (
           <motion.form
@@ -65,6 +67,9 @@ export function NewsletterForm() {
                   placeholder="you@company.com"
                   aria-label="Email address"
                   aria-invalid={!!errors.email}
+                  aria-describedby={
+                    errors.email ? "newsletter-email-error" : undefined
+                  }
                   autoComplete="email"
                   className="h-12 rounded-full pl-11"
                   {...register("email")}
@@ -84,7 +89,10 @@ export function NewsletterForm() {
               </Button>
             </div>
             {errors.email && (
-              <p className="mt-2 text-center text-xs text-destructive sm:text-left">
+              <p
+                id="newsletter-email-error"
+                className="mt-2 text-center text-xs text-destructive sm:text-left"
+              >
                 {errors.email.message}
               </p>
             )}

@@ -2,7 +2,7 @@
 
 import type { TestimonialData } from "@/components/sections/testimonials/TestimonialCard";
 import { TestimonialCarousel } from "@/components/sections/testimonials/TestimonialCarousel";
-import { SectionHeader } from "@/components/sections/testimonials/SectionHeader";
+import { SectionHeader } from "@/components/sections/shared/SectionHeader";
 import { SectionBackground } from "@/components/sections/shared/SectionBackground";
 
 const testimonials: TestimonialData[] = [

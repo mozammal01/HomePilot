@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import {
@@ -27,10 +27,12 @@ const slideVariants = {
 
 export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) {
   const [[index, direction], setIndex] = useState([0, 0]);
-  const [paused, setPaused] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const prefersReducedMotion = useReducedMotion();
   const total = testimonials.length;
   const timeoutRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const paused = hovered || !isPlaying;
 
   function goTo(nextIndex: number) {
     const dir = nextIndex > index ? 1 : -1;
@@ -53,10 +55,10 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
 
   return (
     <div
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocus={() => setPaused(true)}
-      onBlur={() => setPaused(false)}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onFocus={() => setHovered(true)}
+      onBlur={() => setHovered(false)}
       className="relative"
     >
       <div className="relative min-h-[22rem] sm:min-h-[19rem]">
@@ -86,13 +88,16 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
           <ChevronLeft className="size-4" aria-hidden="true" />
         </button>
 
-        <div className="flex items-center gap-2" role="tablist" aria-label="Testimonials">
+        <div
+          className="flex items-center gap-2"
+          role="group"
+          aria-label="Testimonials"
+        >
           {testimonials.map((testimonial, i) => (
             <button
               key={testimonial.name}
               type="button"
-              role="tab"
-              aria-selected={i === index}
+              aria-current={i === index ? "true" : undefined}
               aria-label={`Show testimonial from ${testimonial.name}`}
               onClick={() => goTo(i)}
               className={`h-1.5 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 ${
@@ -110,6 +115,24 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
         >
           <ChevronRight className="size-4" aria-hidden="true" />
         </button>
+
+        {!prefersReducedMotion && (
+          <button
+            type="button"
+            onClick={() => setIsPlaying((prev) => !prev)}
+            aria-label={
+              isPlaying ? "Pause testimonial autoplay" : "Resume testimonial autoplay"
+            }
+            aria-pressed={!isPlaying}
+            className="flex size-10 items-center justify-center rounded-full border border-border/70 bg-background/60 text-foreground backdrop-blur-sm transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+          >
+            {isPlaying ? (
+              <Pause className="size-4" aria-hidden="true" />
+            ) : (
+              <Play className="size-4" aria-hidden="true" />
+            )}
+          </button>
+        )}
       </div>
     </div>
   );

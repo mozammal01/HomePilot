@@ -3,7 +3,7 @@
 import { BarChart3, Building2, CreditCard, Users, Wrench, Zap } from "lucide-react";
 
 import { FeatureItem, type FeatureItemData } from "@/components/sections/features/FeatureItem";
-import { SectionHeader } from "@/components/sections/features/SectionHeader";
+import { SectionHeader } from "@/components/sections/shared/SectionHeader";
 import { SectionBackground } from "@/components/sections/shared/SectionBackground";
 
 const features: FeatureItemData[] = [

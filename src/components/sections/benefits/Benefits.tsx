@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 
 import { BenefitCard, type BenefitData } from "@/components/sections/benefits/BenefitCard";
-import { SectionHeader } from "@/components/sections/benefits/SectionHeader";
+import { SectionHeader } from "@/components/sections/shared/SectionHeader";
 import { SectionBackground } from "@/components/sections/shared/SectionBackground";
 
 const benefits: BenefitData[] = [

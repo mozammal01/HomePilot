@@ -5,7 +5,7 @@ import { useState } from "react";
 
 import { BillingToggle } from "@/components/sections/pricing/BillingToggle";
 import { PricingCard, type PricingPlan } from "@/components/sections/pricing/PricingCard";
-import { SectionHeader } from "@/components/sections/pricing/SectionHeader";
+import { SectionHeader } from "@/components/sections/shared/SectionHeader";
 import { SectionBackground } from "@/components/sections/shared/SectionBackground";
 import { siteConfig } from "@/config/site";
 

@@ -163,9 +163,10 @@ export function HeroDashboard() {
                   </p>
                   <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-foreground/10">
                     <motion.div
-                      className="h-full rounded-full bg-foreground"
-                      initial={{ width: 0 }}
-                      animate={{ width: "94%" }}
+                      className="h-full w-[94%] rounded-full bg-foreground"
+                      style={{ transformOrigin: "left" }}
+                      initial={{ scaleX: 0 }}
+                      animate={{ scaleX: 1 }}
                       transition={{
                         duration: 1.2,
                         delay: 0.8,

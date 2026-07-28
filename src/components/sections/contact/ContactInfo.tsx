@@ -69,7 +69,7 @@ export function ContactInfo({ headingId }: ContactInfoProps) {
         variants={fadeUp}
         className="font-display text-2xl font-semibold tracking-tight text-foreground sm:text-3xl lg:text-4xl"
       >
-        Let's Talk About Your Portfolio
+        Let&apos;s Talk About Your Portfolio
       </motion.h2>
 
       <motion.p

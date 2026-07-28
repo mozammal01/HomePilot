@@ -1,17 +1,22 @@
 "use client";
 
 import { AnimatePresence, motion, type Variants } from "framer-motion";
+import { useEffect, useRef, type RefObject } from "react";
 
 import { CTAButtons } from "@/components/layout/navbar/CTAButtons";
 import { useSmoothNavClick } from "@/hooks/use-smooth-nav-click";
 import { cn } from "@/lib/utils";
 import type { NavItem } from "@/types";
 
+const FOCUSABLE_SELECTOR =
+  'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
 type MobileMenuProps = {
   isOpen: boolean;
   items: readonly NavItem[];
   activeHref: string;
   onLinkClick: () => void;
+  returnFocusRef: RefObject<HTMLButtonElement | null>;
 };
 
 const panelVariants: Variants = {
@@ -48,13 +53,57 @@ export function MobileMenu({
   items,
   activeHref,
   onLinkClick,
+  returnFocusRef,
 }: MobileMenuProps) {
   const handleSmoothClick = useSmoothNavClick();
+  const panelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const toggleButton = returnFocusRef.current;
+    const panel = panelRef.current;
+    const firstFocusable =
+      panel?.querySelector<HTMLElement>(FOCUSABLE_SELECTOR);
+    firstFocusable?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onLinkClick();
+        return;
+      }
+
+      if (event.key !== "Tab" || !panel) return;
+
+      const focusable = Array.from(
+        panel.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)
+      );
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      toggleButton?.focus();
+    };
+  }, [isOpen, onLinkClick, returnFocusRef]);
 
   return (
     <AnimatePresence>
       {isOpen && (
         <motion.div
+          ref={panelRef}
           id="mobile-menu"
           key="mobile-menu"
           variants={panelVariants}

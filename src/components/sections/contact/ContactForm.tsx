@@ -43,6 +43,8 @@ export function ContactForm() {
         {submitted ? (
           <motion.div
             key="success"
+            role="status"
+            aria-live="polite"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
@@ -93,11 +95,14 @@ export function ContactForm() {
                   id="contact-name"
                   autoComplete="name"
                   aria-invalid={!!errors.name}
+                  aria-describedby={errors.name ? "contact-name-error" : undefined}
                   className="h-11"
                   {...register("name")}
                 />
                 {errors.name && (
-                  <p className="text-xs text-destructive">{errors.name.message}</p>
+                  <p id="contact-name-error" className="text-xs text-destructive">
+                    {errors.name.message}
+                  </p>
                 )}
               </div>
 
@@ -108,11 +113,14 @@ export function ContactForm() {
                   type="email"
                   autoComplete="email"
                   aria-invalid={!!errors.email}
+                  aria-describedby={errors.email ? "contact-email-error" : undefined}
                   className="h-11"
                   {...register("email")}
                 />
                 {errors.email && (
-                  <p className="text-xs text-destructive">{errors.email.message}</p>
+                  <p id="contact-email-error" className="text-xs text-destructive">
+                    {errors.email.message}
+                  </p>
                 )}
               </div>
             </div>
@@ -152,10 +160,13 @@ export function ContactForm() {
                 id="contact-message"
                 rows={5}
                 aria-invalid={!!errors.message}
+                aria-describedby={errors.message ? "contact-message-error" : undefined}
                 {...register("message")}
               />
               {errors.message && (
-                <p className="text-xs text-destructive">{errors.message.message}</p>
+                <p id="contact-message-error" className="text-xs text-destructive">
+                  {errors.message.message}
+                </p>
               )}
             </div>
 

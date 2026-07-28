@@ -9,7 +9,7 @@ import {
   Wrench,
 } from "lucide-react";
 
-import { SectionHeader } from "@/components/sections/how-it-works/SectionHeader";
+import { SectionHeader } from "@/components/sections/shared/SectionHeader";
 import { Timeline } from "@/components/sections/how-it-works/Timeline";
 import type { TimelineStepData } from "@/components/sections/how-it-works/TimelineStep";
 import { SectionBackground } from "@/components/sections/shared/SectionBackground";

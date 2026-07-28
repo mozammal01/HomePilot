@@ -11,7 +11,7 @@ import {
 
 import { FeatureGrid, type Feature } from "@/components/sections/why-homepilot/FeatureGrid";
 import { FeatureIllustration } from "@/components/sections/why-homepilot/FeatureIllustration";
-import { SectionHeader } from "@/components/sections/why-homepilot/SectionHeader";
+import { SectionHeader } from "@/components/sections/shared/SectionHeader";
 import { SectionBackground } from "@/components/sections/shared/SectionBackground";
 
 const features: Feature[] = [

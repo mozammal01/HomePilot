@@ -6,7 +6,15 @@ export const siteConfig = {
   description:
     "HomePilot is a premium property management platform that helps landlords, property managers, and real estate businesses manage properties, tenants, rent, and maintenance from one intelligent dashboard.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.homepilot.com",
-  ogImage: "/og.png",
+  keywords: [
+    "property management software",
+    "landlord software",
+    "tenant management platform",
+    "rent collection software",
+    "real estate management platform",
+    "maintenance tracking software",
+    "property management dashboard",
+  ],
   links: {
     twitter: "",
     linkedin: "",

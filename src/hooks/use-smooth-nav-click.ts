@@ -21,9 +21,19 @@ export function useSmoothNavClick() {
       return;
     }
 
-    if (href.startsWith("#") && document.querySelector(href)) {
-      event.preventDefault();
-      lenis?.scrollTo(href, { offset: -96, duration: 1.2 });
+    if (href.startsWith("#")) {
+      if (pathname !== "/") {
+        // Not on the homepage — hash-only hrefs would resolve against the
+        // current path (e.g. "/privacy#features"), so navigate home first.
+        event.preventDefault();
+        window.location.href = `/${href}`;
+        return;
+      }
+
+      if (document.querySelector(href)) {
+        event.preventDefault();
+        lenis?.scrollTo(href, { offset: -96, duration: 1.2 });
+      }
     }
   };
 }

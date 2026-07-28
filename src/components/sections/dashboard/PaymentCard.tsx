@@ -1,5 +1,3 @@
-"use client";
-
 import { CreditCard } from "lucide-react";
 
 const transactions = [
