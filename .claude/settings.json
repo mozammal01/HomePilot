@@ -54,7 +54,14 @@
       "Bash(node -e \"const p=require\\('./package.json'\\); console.log\\('framer-motion:', p.dependencies['framer-motion'], p.dependencies['motion']\\); console.log\\('next:', p.dependencies['next']\\); console.log\\('lucide:', p.dependencies['lucide-react']\\)\")",
       "Bash(node verify-dashboard.js)",
       "Bash(node debug-buttons.js)",
-      "Bash(node check-dashboard-a11y.js)"
+      "Bash(node check-dashboard-a11y.js)",
+      "Bash(npx shadcn@latest add accordion switch input textarea label avatar --yes)",
+      "Bash(xargs grep -n \"checked\\\\|onCheckedChange\\\\|Props\")",
+      "Bash(xargs grep -n \"openMultiple\\\\|multiple\\\\|defaultValue\\\\|Props\\\\b\")",
+      "Bash(npx eslint *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000 --max-time 5)",
+      "Bash(curl -s http://localhost:3001 --max-time 10)",
+      "PowerShell(Get-NetTCPConnection -LocalPort 3001 -State Listen | Select-Object -ExpandProperty OwningProcess -Unique | ForEach-Object { Stop-Process -Id $_ -Force -ErrorAction SilentlyContinue }; \"done\")"
     ]
   }
 }
