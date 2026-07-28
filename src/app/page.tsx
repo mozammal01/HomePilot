@@ -1,3 +1,4 @@
+import { DashboardShowcase } from "@/components/sections/dashboard";
 import { Features } from "@/components/sections/features";
 import { Hero } from "@/components/sections/hero";
 import { SuccessMetrics } from "@/components/sections/metrics";
@@ -12,6 +13,7 @@ export default function Home() {
       <SuccessMetrics />
       <WhyHomePilot />
       <Features />
+      <DashboardShowcase />
     </main>
   );
 }
