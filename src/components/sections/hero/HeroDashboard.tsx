@@ -3,6 +3,7 @@
 import {
   motion,
   useMotionValue,
+  useReducedMotion,
   useSpring,
   useTransform,
   type Variants,
@@ -22,7 +23,7 @@ const container: Variants = {
     opacity: 1,
     scale: 1,
     y: 0,
-    transition: { duration: 0.8, delay: 0.3, ease: EASE_OUT },
+    transition: { duration: 0.5, delay: 0.15, ease: EASE_OUT },
   },
 };
 
@@ -42,6 +43,7 @@ function StatCard({
 }
 
 export function HeroDashboard() {
+  const prefersReducedMotion = useReducedMotion();
   const rawX = useMotionValue(0);
   const rawY = useMotionValue(0);
   const parallaxX = useSpring(rawX, { stiffness: 120, damping: 20 });
@@ -80,9 +82,10 @@ export function HeroDashboard() {
           }}
         >
           <motion.div
-            animate={{ y: [0, -14, 0] }}
-            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-            className="relative rounded-3xl border border-border/60 bg-card/80 p-5 shadow-2xl backdrop-blur-2xl sm:p-6"
+            animate={!prefersReducedMotion ? { y: [0, -14, 0] } : undefined}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            style={{ willChange: "transform" }}
+            className="relative rounded-3xl border border-border/60 bg-card/80 p-5 shadow-2xl backdrop-blur-lg sm:p-6"
           >
             {/* window chrome */}
             <div className="mb-5 flex items-center justify-between">
@@ -169,8 +172,8 @@ export function HeroDashboard() {
                       initial={{ scaleX: 0 }}
                       animate={{ scaleX: 1 }}
                       transition={{
-                        duration: 1.2,
-                        delay: 0.8,
+                        duration: 0.8,
+                        delay: 0.45,
                         ease: EASE_OUT,
                       }}
                     />
@@ -215,8 +218,8 @@ export function HeroDashboard() {
                     initial={{ scaleY: 0 }}
                     animate={{ scaleY: 1 }}
                     transition={{
-                      duration: 0.5,
-                      delay: 1 + i * 0.06,
+                      duration: 0.35,
+                      delay: 0.55 + i * 0.04,
                       ease: EASE_OUT,
                     }}
                   />

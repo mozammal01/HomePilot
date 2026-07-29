@@ -5,6 +5,7 @@ import { Mail } from "lucide-react";
 
 import { NewsletterForm } from "@/components/sections/newsletter/NewsletterForm";
 import { getAccentColor } from "@/components/sections/shared/gradients";
+import { useAmbientReveal } from "@/hooks/use-ambient-reveal";
 import { createFadeUpVariants, createStaggerContainer } from "@/lib/motion";
 
 const container = createStaggerContainer();
@@ -12,6 +13,7 @@ const fadeUp = createFadeUpVariants();
 
 export function Newsletter() {
   const accent = getAccentColor(1);
+  const { ref, shouldAnimate } = useAmbientReveal<HTMLDivElement>();
 
   return (
     <section
@@ -20,15 +22,18 @@ export function Newsletter() {
       className="relative overflow-x-clip px-4 py-16 sm:px-6 lg:px-8"
     >
       <div className="mx-auto w-full max-w-7xl">
-        <div className="relative overflow-hidden rounded-3xl border border-border/60 bg-card/60 px-6 py-14 shadow-2xl backdrop-blur-xl sm:px-12 sm:py-16">
+        <div
+          ref={ref}
+          className="relative overflow-hidden rounded-3xl border border-border/60 bg-card/60 px-6 py-14 shadow-2xl backdrop-blur-xl sm:px-12 sm:py-16"
+        >
           <motion.div
             aria-hidden="true"
             className="absolute top-1/2 left-1/2 -z-10 size-[36rem] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.14] blur-3xl dark:opacity-[0.1]"
             style={{
               backgroundImage: `radial-gradient(circle, ${accent} 0%, transparent 70%)`,
             }}
-            animate={{ scale: [1, 1.08, 1] }}
-            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+            animate={shouldAnimate ? { scale: [1, 1.08, 1] } : undefined}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
           />
 
           <motion.div

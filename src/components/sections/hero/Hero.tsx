@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
 import { HeroBackground } from "@/components/sections/hero/HeroBackground";
@@ -8,6 +8,8 @@ import { HeroContent } from "@/components/sections/hero/HeroContent";
 import { HeroDashboard } from "@/components/sections/hero/HeroDashboard";
 
 export function Hero() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <section className="relative flex min-h-svh flex-col overflow-x-clip pt-36 pb-16 sm:pt-40 lg:pt-44 lg:pb-20">
       <HeroBackground />
@@ -20,12 +22,12 @@ export function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 1.6 }}
+        transition={{ duration: 0.6, delay: 1 }}
         className="absolute inset-x-0 bottom-6 hidden justify-center sm:flex"
       >
         <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+          animate={!prefersReducedMotion ? { y: [0, 8, 0] } : undefined}
+          transition={{ duration: 1.3, repeat: Infinity, ease: "easeInOut" }}
           className="flex flex-col items-center gap-1 text-muted-foreground"
         >
           <span className="text-xs font-medium tracking-wide uppercase">

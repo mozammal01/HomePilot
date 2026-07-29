@@ -1,7 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
+import { useRef } from "react";
 
 import { getAccentColor } from "@/components/sections/shared/gradients";
 import { EASE_OUT, createFadeUpVariants } from "@/lib/motion";
@@ -25,9 +26,14 @@ export function BenefitCard({
   index,
 }: BenefitCardProps) {
   const accent = getAccentColor(index);
+  const ref = useRef<HTMLLIElement>(null);
+  const isInView = useInView(ref, { amount: 0.4 });
+  const prefersReducedMotion = useReducedMotion();
+  const shouldAnimate = isInView && !prefersReducedMotion;
 
   return (
     <motion.li
+      ref={ref}
       variants={itemVariants}
       whileHover={{ y: -8 }}
       transition={{ duration: 0.3, ease: EASE_OUT }}
@@ -48,9 +54,9 @@ export function BenefitCard({
         <div className="flex items-start justify-between gap-3">
           <motion.span
             aria-hidden="true"
-            animate={{ y: [0, -8, 0] }}
+            animate={shouldAnimate ? { y: [0, -8, 0] } : undefined}
             transition={{
-              duration: 5 + index * 0.4,
+              duration: 3 + index * 0.25,
               repeat: Infinity,
               ease: "easeInOut",
             }}

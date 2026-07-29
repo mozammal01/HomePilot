@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
 
 import { Badge } from "@/components/ui/badge";
 import { HeroButtons } from "@/components/sections/hero/HeroButtons";
@@ -36,6 +36,8 @@ const wordVariants: Variants = {
 };
 
 export function HeroContent() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <motion.div
       variants={container}
@@ -51,7 +53,11 @@ export function HeroContent() {
           <span className="relative flex size-1.5">
             <motion.span
               className="absolute inline-flex size-full rounded-full bg-emerald-500"
-              animate={{ opacity: [0.6, 0, 0.6], scale: [1, 1.8, 1] }}
+              animate={
+                !prefersReducedMotion
+                  ? { opacity: [0.6, 0, 0.6], scale: [1, 1.8, 1] }
+                  : undefined
+              }
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             />
             <span className="relative inline-flex size-1.5 rounded-full bg-emerald-500" />
@@ -72,11 +78,13 @@ export function HeroContent() {
                 >
                   <motion.span
                     className="bg-size-[200%_auto] bg-linear-to-r from-[oklch(0.62_0.19_280)] via-[oklch(0.66_0.18_320)] to-[oklch(0.7_0.15_200)] bg-clip-text text-transparent"
-                    animate={{
-                      backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                    }}
+                    animate={
+                      !prefersReducedMotion
+                        ? { backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }
+                        : undefined
+                    }
                     transition={{
-                      duration: 8,
+                      duration: 5,
                       repeat: Infinity,
                       ease: "linear",
                     }}

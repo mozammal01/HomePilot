@@ -1,6 +1,12 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  motion,
+  useInView,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import {
   Bell,
   BarChart3,
@@ -365,6 +371,10 @@ export function FeatureVisual({ variant, align, index, label }: FeatureVisualPro
   });
   const parallaxY = useTransform(scrollYProgress, [0, 1], [32, -32]);
 
+  const isInView = useInView(ref, { amount: 0.2 });
+  const prefersReducedMotion = useReducedMotion();
+  const shouldAnimate = isInView && !prefersReducedMotion;
+
   return (
     <div
       ref={ref}
@@ -379,9 +389,10 @@ export function FeatureVisual({ variant, align, index, label }: FeatureVisualPro
         transition={{ duration: 0.7, ease: EASE_OUT }}
       >
         <motion.div
-          animate={{ y: [0, -12, 0] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-          className="relative rounded-3xl border border-border/60 bg-card/80 p-5 shadow-2xl backdrop-blur-2xl sm:p-6"
+          animate={shouldAnimate ? { y: [0, -12, 0] } : undefined}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          style={{ willChange: "transform" }}
+          className="relative rounded-3xl border border-border/60 bg-card/80 p-5 shadow-2xl backdrop-blur-lg sm:p-6"
         >
           <div className="mb-5 flex items-center justify-between">
             <div className="flex items-center gap-1.5">
@@ -396,9 +407,10 @@ export function FeatureVisual({ variant, align, index, label }: FeatureVisualPro
         </motion.div>
 
         <motion.div
-          animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
-          className={`absolute z-10 flex items-center gap-3 rounded-2xl border border-border/60 bg-card/90 p-3.5 shadow-xl backdrop-blur-xl ${
+          animate={shouldAnimate ? { y: [0, -10, 0] } : undefined}
+          transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut", delay: 0.25 }}
+          style={{ willChange: "transform" }}
+          className={`absolute z-10 flex items-center gap-3 rounded-2xl border border-border/60 bg-card/90 p-3.5 shadow-xl backdrop-blur-md ${
             align === "left"
               ? "-left-4 -bottom-6 sm:-left-8"
               : "-right-4 -bottom-6 sm:-right-8"

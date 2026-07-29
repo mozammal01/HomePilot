@@ -2,8 +2,10 @@
 
 import {
   motion,
+  useInView,
   useMotionTemplate,
   useMotionValue,
+  useReducedMotion,
   useSpring,
   useTransform,
 } from "framer-motion";
@@ -45,7 +47,7 @@ const floatingToasts: FloatingToastData[] = [
     title: "Payment Received",
     subtitle: "$1,450 · Unit 4B",
     className: "-top-6 -left-4 sm:-left-10",
-    floatDuration: 6,
+    floatDuration: 3.4,
     floatDelay: 0,
   },
   {
@@ -53,8 +55,8 @@ const floatingToasts: FloatingToastData[] = [
     title: "Ticket Completed",
     subtitle: "Unit 2A · window latch",
     className: "-bottom-6 -right-4 sm:-right-10",
-    floatDuration: 6.5,
-    floatDelay: 0.4,
+    floatDuration: 3.7,
+    floatDelay: 0.2,
   },
 ];
 
@@ -65,7 +67,8 @@ function FloatingToast({
   className,
   floatDuration,
   floatDelay,
-}: FloatingToastData) {
+  shouldAnimate,
+}: FloatingToastData & { shouldAnimate: boolean }) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.85, y: 16 }}
@@ -80,14 +83,15 @@ function FloatingToast({
       className={`absolute z-20 hidden sm:block ${className}`}
     >
       <motion.div
-        animate={{ y: [0, -12, 0] }}
+        animate={shouldAnimate ? { y: [0, -12, 0] } : undefined}
         transition={{
           duration: floatDuration,
           repeat: Infinity,
           ease: "easeInOut",
           delay: floatDelay,
         }}
-        className="flex items-center gap-3 rounded-2xl border border-border/60 bg-card/90 p-3.5 shadow-xl backdrop-blur-xl"
+        style={{ willChange: "transform" }}
+        className="flex items-center gap-3 rounded-2xl border border-border/60 bg-card/90 p-3.5 shadow-xl backdrop-blur-md"
       >
         <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-foreground/5 text-foreground">
           <Icon className="size-4" aria-hidden="true" />
@@ -105,6 +109,9 @@ function FloatingToast({
 
 export function DashboardWindow() {
   const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { amount: 0.2 });
+  const prefersReducedMotion = useReducedMotion();
+  const shouldAnimate = isInView && !prefersReducedMotion;
 
   const rawX = useMotionValue(0);
   const rawY = useMotionValue(0);
@@ -152,9 +159,10 @@ export function DashboardWindow() {
           className="relative"
         >
           <motion.div
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            className="relative overflow-hidden rounded-3xl border border-border/60 bg-card/80 shadow-2xl backdrop-blur-2xl"
+            animate={shouldAnimate ? { y: [0, -10, 0] } : undefined}
+            transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+            style={{ willChange: "transform" }}
+            className="relative overflow-hidden rounded-3xl border border-border/60 bg-card/80 shadow-2xl backdrop-blur-lg"
           >
             <motion.div
               style={{ background: glowBackground }}
@@ -189,9 +197,9 @@ export function DashboardWindow() {
                     />
                     <motion.span
                       className="absolute -top-0.5 -right-0.5 flex size-3.5 items-center justify-center rounded-full bg-red-500 text-[9px] font-semibold text-white"
-                      animate={{ scale: [1, 1.15, 1] }}
+                      animate={shouldAnimate ? { scale: [1, 1.15, 1] } : undefined}
                       transition={{
-                        duration: 2,
+                        duration: 1.4,
                         repeat: Infinity,
                         ease: "easeInOut",
                       }}
@@ -251,7 +259,7 @@ export function DashboardWindow() {
           </motion.div>
 
           {floatingToasts.map((toast) => (
-            <FloatingToast key={toast.title} {...toast} />
+            <FloatingToast key={toast.title} {...toast} shouldAnimate={shouldAnimate} />
           ))}
         </motion.div>
       </motion.div>

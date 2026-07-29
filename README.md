@@ -70,6 +70,20 @@ src/
 
 Each section follows the same pattern: a barrel `index.ts`, a top-level component, and local sub-components — making sections easy to reorder, reuse, or remove from `page.tsx`.
 
+## Assets
+
+The site ships with **no static image files** — every visual is generated in code, so there's nothing to license, optimize, or swap out manually:
+
+| Asset type | Source | Notes |
+|---|---|---|
+| Fonts | `Inter` and `Bricolage_Grotesque` via `next/font/google` ([src/lib/fonts.ts](src/lib/fonts.ts)) | Self-hosted and subset automatically at build time by Next.js — no font files checked into the repo, no external requests at runtime |
+| Icons | [Lucide React](https://lucide.dev) (`lucide-react`) | Rendered as inline SVG components throughout `src/components/` — no icon sprite or image files |
+| Favicon | [src/app/favicon.ico](src/app/favicon.ico) | The only binary asset in the repo |
+| OG / Twitter card images | [src/app/opengraph-image.tsx](src/app/opengraph-image.tsx), [src/app/twitter-image.tsx](src/app/twitter-image.tsx), shared JSX in [src/lib/og-image.tsx](src/lib/og-image.tsx) | Rendered on-demand with `next/og` (`ImageResponse`) from JSX + CSS gradients — no static image behind them |
+| Dashboard/hero visuals, illustrations, gradients | Local components (e.g. `HeroDashboard`, `FeatureIllustration`, `FloatingCards`) | Built from CSS, SVG, and Framer Motion — no raster or vector image files |
+
+`public/` is present but intentionally empty. If you add real product screenshots, logos, or marketing images later, that's where they belong (referenced via Next.js `<Image>` from `/`).
+
 ## Installation
 
 Requires **Node.js 18.18+** (Node 20 LTS recommended) and npm.

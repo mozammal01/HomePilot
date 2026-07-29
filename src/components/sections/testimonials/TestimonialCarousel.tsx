@@ -1,9 +1,10 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
+import { getAccentColor } from "@/components/sections/shared/gradients";
 import {
   TestimonialCard,
   type TestimonialData,
@@ -29,11 +30,10 @@ const slideVariants = {
 export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) {
   const [[index, direction], setIndex] = useState([0, 0]);
   const [hovered, setHovered] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(true);
   const prefersReducedMotion = useReducedMotion();
   const total = testimonials.length;
   const timeoutRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const paused = hovered || !isPlaying;
+  const paused = hovered;
 
   function goTo(nextIndex: number) {
     const dir = nextIndex > index ? 1 : -1;
@@ -53,6 +53,7 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
   }, [paused, prefersReducedMotion, total]);
 
   const current = testimonials[index];
+  const accent = getAccentColor(index);
 
   return (
     <div
@@ -62,7 +63,7 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
       onBlur={() => setHovered(false)}
       className="relative"
     >
-      <div className="relative min-h-[22rem] sm:min-h-[19rem]">
+      <div className="relative mx-auto min-h-88 w-full max-w-3xl sm:min-h-76">
         <AnimatePresence mode="wait" custom={direction} initial={false}>
           <motion.div
             key={index}
@@ -74,66 +75,47 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
             transition={{ duration: 0.5, ease: EASE_OUT }}
             className="absolute inset-0"
           >
-            <TestimonialCard {...current} />
+            <TestimonialCard {...current} index={index} />
           </motion.div>
         </AnimatePresence>
-      </div>
 
-      <div className="mt-8 flex items-center justify-center gap-6">
         <button
           type="button"
           onClick={() => goTo(index - 1)}
           aria-label="Previous testimonial"
-          className="flex size-10 items-center justify-center rounded-full border border-border/70 bg-background/60 text-foreground backdrop-blur-sm transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+          className="absolute bottom-4 left-4 z-30 flex size-10 items-center justify-center rounded-full border border-border/70 bg-background/60 text-foreground backdrop-blur-sm transition-all duration-200 hover:scale-105 hover:border-border hover:bg-muted active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
         >
           <ChevronLeft className="size-4" aria-hidden="true" />
         </button>
-
-        <div
-          className="flex items-center gap-2"
-          role="group"
-          aria-label="Testimonials"
-        >
-          {testimonials.map((testimonial, i) => (
-            <button
-              key={testimonial.name}
-              type="button"
-              aria-current={i === index ? "true" : undefined}
-              aria-label={`Show testimonial from ${testimonial.name}`}
-              onClick={() => goTo(i)}
-              className={`h-1.5 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 ${
-                i === index ? "w-6 bg-foreground" : "w-1.5 bg-foreground/20 hover:bg-foreground/40"
-              }`}
-            />
-          ))}
-        </div>
 
         <button
           type="button"
           onClick={() => goTo(index + 1)}
           aria-label="Next testimonial"
-          className="flex size-10 items-center justify-center rounded-full border border-border/70 bg-background/60 text-foreground backdrop-blur-sm transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+          className="absolute right-4 bottom-4 z-30 flex size-10 items-center justify-center rounded-full border border-border/70 bg-background/60 text-foreground backdrop-blur-sm transition-all duration-200 hover:scale-105 hover:border-border hover:bg-muted active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
         >
           <ChevronRight className="size-4" aria-hidden="true" />
         </button>
+      </div>
 
-        {!prefersReducedMotion && (
+      <div
+        className="mt-6 flex items-center justify-center gap-2"
+        role="group"
+        aria-label="Testimonials"
+      >
+        {testimonials.map((testimonial, i) => (
           <button
+            key={testimonial.name}
             type="button"
-            onClick={() => setIsPlaying((prev) => !prev)}
-            aria-label={
-              isPlaying ? "Pause testimonial autoplay" : "Resume testimonial autoplay"
-            }
-            aria-pressed={!isPlaying}
-            className="flex size-10 items-center justify-center rounded-full border border-border/70 bg-background/60 text-foreground backdrop-blur-sm transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
-          >
-            {isPlaying ? (
-              <Pause className="size-4" aria-hidden="true" />
-            ) : (
-              <Play className="size-4" aria-hidden="true" />
-            )}
-          </button>
-        )}
+            aria-current={i === index ? "true" : undefined}
+            aria-label={`Show testimonial from ${testimonial.name}`}
+            onClick={() => goTo(i)}
+            className={`h-1.5 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 ${
+              i === index ? "w-6" : "w-1.5 bg-foreground/20 hover:bg-foreground/40"
+            }`}
+            style={i === index ? { backgroundColor: accent } : undefined}
+          />
+        ))}
       </div>
     </div>
   );
