@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
 
 import { getAccentColor } from "@/components/sections/shared/gradients";
+import { EASE_OUT } from "@/lib/motion";
 
 export type TimelineStepData = {
   icon: LucideIcon;
@@ -31,7 +32,7 @@ export function TimelineStep({
       initial={{ opacity: 0, x: -24 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, amount: 0.5 }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.6, ease: EASE_OUT }}
       className="relative"
     >
       <button

@@ -89,7 +89,17 @@
       "PowerShell(Get-NetTCPConnection -LocalPort 3008 -State Listen -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess -Unique | ForEach-Object { Stop-Process -Id $_ -Force -ErrorAction SilentlyContinue }; \"done\")",
       "Bash(node scratchpad-final.mjs)",
       "PowerShell(Get-NetTCPConnection -LocalPort 3009 -State Listen -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess -Unique | ForEach-Object { Stop-Process -Id $_ -Force -ErrorAction SilentlyContinue }; \"done\")",
-      "Bash(npm uninstall *)"
+      "Bash(npm uninstall *)",
+      "Bash(node scratchpad-visual.mjs)",
+      "Bash(node scratchpad-visual2.mjs)",
+      "PowerShell(Get-NetTCPConnection -LocalPort 3010 -State Listen -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess -Unique | ForEach-Object { Stop-Process -Id $_ -Force -ErrorAction SilentlyContinue }; \"done\")",
+      "Bash(node scratchpad-dashboard-mobile.mjs)",
+      "PowerShell(Get-NetTCPConnection -LocalPort 3011 -State Listen -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess -Unique | ForEach-Object { Stop-Process -Id $_ -Force -ErrorAction SilentlyContinue }; \"done\")",
+      "Bash(rm -f src/components/shared/.gitkeep)",
+      "Bash(rmdir src/components/shared)",
+      "Bash(node scratchpad-finalcheck.mjs)",
+      "Bash(rm -f scratchpad-finalcheck.mjs)",
+      "PowerShell(Get-NetTCPConnection -LocalPort 3012 -State Listen -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess -Unique | ForEach-Object { Stop-Process -Id $_ -Force -ErrorAction SilentlyContinue }; \"done\")"
     ]
   }
 }

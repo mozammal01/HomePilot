@@ -1,5 +1,7 @@
 import { CreditCard } from "lucide-react";
 
+import { DashboardMiniCard } from "@/components/sections/dashboard/DashboardMiniCard";
+
 const transactions = [
   { name: "Sarah Chen", amount: "$1,450", status: "Collected", tone: "positive" as const },
   { name: "Marcus Lee", amount: "$1,200", status: "Collected", tone: "positive" as const },
@@ -13,7 +15,7 @@ const toneClasses = {
 
 export function PaymentCard() {
   return (
-    <div className="flex flex-col gap-4 rounded-2xl border border-border/60 bg-background/60 p-4 transition-colors duration-300 hover:border-foreground/15 sm:p-5">
+    <DashboardMiniCard className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
         <p className="text-xs font-medium text-muted-foreground">
           Payment Activity
@@ -43,6 +45,6 @@ export function PaymentCard() {
           </div>
         ))}
       </div>
-    </div>
+    </DashboardMiniCard>
   );
 }

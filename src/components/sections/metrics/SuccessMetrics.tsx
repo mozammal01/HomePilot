@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Building2,
   Clock,
@@ -11,7 +11,9 @@ import {
 } from "lucide-react";
 
 import { MetricCard } from "@/components/sections/metrics/MetricCard";
+import { IllustrativeDataNote } from "@/components/sections/shared/IllustrativeDataNote";
 import { SectionBackground } from "@/components/sections/shared/SectionBackground";
+import { createFadeUpVariants, createStaggerContainer } from "@/lib/motion";
 
 const metrics = [
   {
@@ -54,21 +56,8 @@ const metrics = [
   },
 ] as const;
 
-const container: Variants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
-  },
-};
-
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 18 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
-  },
-};
+const container = createStaggerContainer();
+const fadeUp = createFadeUpVariants();
 
 export function SuccessMetrics() {
   return (
@@ -97,8 +86,8 @@ export function SuccessMetrics() {
             variants={fadeUp}
             className="text-balance text-base leading-relaxed text-muted-foreground"
           >
-            Real results from a platform built to scale with property
-            businesses of every size.
+            Targets for a platform built to scale with property businesses of
+            every size.
           </motion.p>
         </motion.div>
 
@@ -113,6 +102,11 @@ export function SuccessMetrics() {
             <MetricCard key={metric.label} {...metric} index={index} />
           ))}
         </motion.ul>
+
+        <IllustrativeDataNote>
+          Figures shown are illustrative targets for demonstration purposes,
+          not audited platform statistics.
+        </IllustrativeDataNote>
       </div>
     </section>
   );

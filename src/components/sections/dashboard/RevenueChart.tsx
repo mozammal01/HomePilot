@@ -4,6 +4,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { TrendingUp } from "lucide-react";
 import { useState } from "react";
 
+import { DashboardMiniCard } from "@/components/sections/dashboard/DashboardMiniCard";
+import { EASE_OUT } from "@/lib/motion";
+
 type Period = "monthly" | "weekly";
 
 type PeriodData = {
@@ -37,7 +40,7 @@ export function RevenueChart() {
   const data = periods[period];
 
   return (
-    <div className="rounded-2xl border border-border/60 bg-background/60 p-4 transition-colors duration-300 hover:border-foreground/15 sm:p-5">
+    <DashboardMiniCard>
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <p className="text-xs font-medium text-muted-foreground">
@@ -61,7 +64,7 @@ export function RevenueChart() {
               type="button"
               aria-pressed={period === key}
               onClick={() => setPeriod(key)}
-              className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+              className={`rounded-full px-3 py-1 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 ${
                 period === key
                   ? "bg-foreground text-background"
                   : "text-muted-foreground hover:text-foreground"
@@ -101,7 +104,7 @@ export function RevenueChart() {
               transition={{
                 duration: 0.5,
                 delay: i * 0.06,
-                ease: [0.16, 1, 0.3, 1],
+                ease: EASE_OUT,
               }}
               style={{ height: `${height}%` }}
               className={`w-full origin-bottom rounded-md transition-colors ${
@@ -122,6 +125,6 @@ export function RevenueChart() {
           </span>
         ))}
       </div>
-    </div>
+    </DashboardMiniCard>
   );
 }

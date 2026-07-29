@@ -1,18 +1,9 @@
 "use client";
 
-import { motion, useInView, useReducedMotion } from "framer-motion";
-import type { CSSProperties } from "react";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 
-const gridStyle: CSSProperties = {
-  backgroundImage:
-    "linear-gradient(to right, color-mix(in srgb, var(--foreground) 5%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in srgb, var(--foreground) 5%, transparent) 1px, transparent 1px)",
-  backgroundSize: "64px 64px",
-  maskImage:
-    "radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%)",
-  WebkitMaskImage:
-    "radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%)",
-};
+import { GridPattern } from "@/components/sections/shared/GridPattern";
+import { useAmbientReveal } from "@/hooks/use-ambient-reveal";
 
 type SectionBackgroundProps = {
   /** Flips blob placement so consecutive sections don't feel identical. */
@@ -26,10 +17,7 @@ export function SectionBackground({
   withDivider = false,
 }: SectionBackgroundProps) {
   const flipped = variant === "reverse";
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { amount: 0.1 });
-  const prefersReducedMotion = useReducedMotion();
-  const shouldAnimate = isInView && !prefersReducedMotion;
+  const { ref, shouldAnimate } = useAmbientReveal<HTMLDivElement>();
 
   return (
     <div
@@ -41,7 +29,7 @@ export function SectionBackground({
         <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-border to-transparent" />
       )}
 
-      <div className="absolute inset-0" style={gridStyle} />
+      <GridPattern lineOpacity={0.05} />
 
       <motion.div
         className={`absolute size-[26rem] rounded-full bg-[radial-gradient(circle,_oklch(0.66_0.18_320)_0%,_transparent_70%)] opacity-[0.12] blur-3xl dark:opacity-[0.08] ${

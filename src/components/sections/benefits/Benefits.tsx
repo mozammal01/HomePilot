@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   BarChart3,
   Building2,
@@ -11,8 +11,10 @@ import {
 } from "lucide-react";
 
 import { BenefitCard, type BenefitData } from "@/components/sections/benefits/BenefitCard";
-import { SectionHeader } from "@/components/sections/shared/SectionHeader";
+import { IllustrativeDataNote } from "@/components/sections/shared/IllustrativeDataNote";
 import { SectionBackground } from "@/components/sections/shared/SectionBackground";
+import { SectionHeader } from "@/components/sections/shared/SectionHeader";
+import { createStaggerContainer } from "@/lib/motion";
 
 const benefits: BenefitData[] = [
   {
@@ -59,12 +61,7 @@ const benefits: BenefitData[] = [
   },
 ];
 
-const container: Variants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.1 },
-  },
-};
+const container = createStaggerContainer(0.1, 0);
 
 export function Benefits() {
   return (
@@ -79,8 +76,8 @@ export function Benefits() {
         <SectionHeader
           headingId="benefits-heading"
           badge="Key Benefits"
-          headline="Real Outcomes for Property Businesses of Every Size"
-          description="HomePilot isn't just software — it's measurable time saved, revenue protected, and growth unlocked for the teams that run on it."
+          headline="The Impact HomePilot Is Built to Deliver"
+          description="HomePilot isn't just software — it's designed to save time, protect revenue, and unlock growth for the teams that run on it."
         />
 
         <motion.ul
@@ -94,6 +91,10 @@ export function Benefits() {
             <BenefitCard key={benefit.title} {...benefit} index={index} />
           ))}
         </motion.ul>
+
+        <IllustrativeDataNote>
+          Figures are illustrative targets, not measured customer results.
+        </IllustrativeDataNote>
       </div>
     </section>
   );

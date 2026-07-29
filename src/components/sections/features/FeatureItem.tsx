@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
 
 import { FeatureContent } from "@/components/sections/features/FeatureContent";
@@ -8,6 +8,7 @@ import {
   FeatureVisual,
   type FeatureVisualVariant,
 } from "@/components/sections/features/FeatureVisual";
+import { createStaggerContainer } from "@/lib/motion";
 
 export type FeatureItemData = {
   variant: FeatureVisualVariant;
@@ -25,10 +26,7 @@ type FeatureItemProps = {
   index: number;
 };
 
-const container: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
-};
+const container = createStaggerContainer(0.1, 0);
 
 export function FeatureItem({ feature, align, index }: FeatureItemProps) {
   const headingId = `feature-${feature.variant}-heading`;

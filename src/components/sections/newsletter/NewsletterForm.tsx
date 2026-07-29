@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { EASE_OUT } from "@/lib/motion";
 import {
   newsletterFormSchema,
   type NewsletterFormValues,
@@ -40,11 +41,11 @@ export function NewsletterForm() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.4, ease: EASE_OUT }}
             className="flex items-center justify-center gap-2.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-5 py-3 text-sm font-medium text-emerald-600 dark:text-emerald-400"
           >
             <CheckCircle2 className="size-4 shrink-0" aria-hidden="true" />
-            You&apos;re subscribed — welcome aboard!
+            This is a demo — no subscription was created.
           </motion.div>
         ) : (
           <motion.form
@@ -52,7 +53,7 @@ export function NewsletterForm() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.4, ease: EASE_OUT }}
             noValidate
             onSubmit={handleSubmit(onSubmit)}
           >

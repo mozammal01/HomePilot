@@ -1,24 +1,12 @@
 "use client";
 
-import { motion, useInView, useReducedMotion } from "framer-motion";
-import type { CSSProperties } from "react";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 
-const gridStyle: CSSProperties = {
-  backgroundImage:
-    "linear-gradient(to right, color-mix(in srgb, var(--foreground) 6%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in srgb, var(--foreground) 6%, transparent) 1px, transparent 1px)",
-  backgroundSize: "56px 56px",
-  maskImage:
-    "radial-gradient(ellipse 90% 90% at 50% 50%, black 20%, transparent 100%)",
-  WebkitMaskImage:
-    "radial-gradient(ellipse 90% 90% at 50% 50%, black 20%, transparent 100%)",
-};
+import { GridPattern } from "@/components/sections/shared/GridPattern";
+import { useAmbientReveal } from "@/hooks/use-ambient-reveal";
 
 export function CTABackground() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { amount: 0.1 });
-  const prefersReducedMotion = useReducedMotion();
-  const shouldAnimate = isInView && !prefersReducedMotion;
+  const { ref, shouldAnimate } = useAmbientReveal<HTMLDivElement>();
 
   return (
     <div
@@ -26,7 +14,11 @@ export function CTABackground() {
       aria-hidden="true"
       className="pointer-events-none absolute inset-0 -z-10 overflow-hidden rounded-[inherit]"
     >
-      <div className="absolute inset-0" style={gridStyle} />
+      <GridPattern
+        lineOpacity={0.06}
+        cellSize={56}
+        mask="radial-gradient(ellipse 90% 90% at 50% 50%, black 20%, transparent 100%)"
+      />
 
       <motion.div
         className="absolute -top-24 -left-24 size-[28rem] rounded-full bg-[radial-gradient(circle,_oklch(0.62_0.19_280)_0%,_transparent_70%)] opacity-30 blur-3xl dark:opacity-20"

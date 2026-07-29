@@ -5,8 +5,8 @@ import { ArrowRight, Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
+import { FormField } from "@/components/ui/form-field";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { signupSchema, type SignupValues } from "@/lib/validations/auth";
 
 export function SignupForm() {
@@ -34,70 +34,26 @@ export function SignupForm() {
 
   return (
     <form noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
-      <div className="flex flex-col gap-1.5">
-        <Label htmlFor="signup-name">Full name</Label>
-        <Input
-          id="signup-name"
-          autoComplete="name"
-          aria-invalid={!!errors.name}
-          aria-describedby={errors.name ? "signup-name-error" : undefined}
-          className="h-11"
-          {...register("name")}
-        />
-        {errors.name && (
-          <p id="signup-name-error" className="text-xs text-destructive">
-            {errors.name.message}
-          </p>
-        )}
-      </div>
+      <FormField id="signup-name" label="Full name" error={errors.name?.message}>
+        <Input autoComplete="name" className="h-11" {...register("name")} />
+      </FormField>
 
-      <div className="flex flex-col gap-1.5">
-        <Label htmlFor="signup-email">Work email</Label>
-        <Input
-          id="signup-email"
-          type="email"
-          autoComplete="email"
-          aria-invalid={!!errors.email}
-          aria-describedby={errors.email ? "signup-email-error" : undefined}
-          className="h-11"
-          {...register("email")}
-        />
-        {errors.email && (
-          <p id="signup-email-error" className="text-xs text-destructive">
-            {errors.email.message}
-          </p>
-        )}
-      </div>
+      <FormField id="signup-email" label="Work email" error={errors.email?.message}>
+        <Input type="email" autoComplete="email" className="h-11" {...register("email")} />
+      </FormField>
 
-      <div className="flex flex-col gap-1.5">
-        <Label htmlFor="signup-company">
-          Company <span className="font-normal text-muted-foreground">(optional)</span>
-        </Label>
-        <Input
-          id="signup-company"
-          autoComplete="organization"
-          className="h-11"
-          {...register("company")}
-        />
-      </div>
+      <FormField id="signup-company" label="Company" optional>
+        <Input autoComplete="organization" className="h-11" {...register("company")} />
+      </FormField>
 
-      <div className="flex flex-col gap-1.5">
-        <Label htmlFor="signup-password">Password</Label>
+      <FormField id="signup-password" label="Password" error={errors.password?.message}>
         <Input
-          id="signup-password"
           type="password"
           autoComplete="new-password"
-          aria-invalid={!!errors.password}
-          aria-describedby={errors.password ? "signup-password-error" : undefined}
           className="h-11"
           {...register("password")}
         />
-        {errors.password && (
-          <p id="signup-password-error" className="text-xs text-destructive">
-            {errors.password.message}
-          </p>
-        )}
-      </div>
+      </FormField>
 
       <Button
         type="submit"

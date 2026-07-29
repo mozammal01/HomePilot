@@ -1,6 +1,19 @@
 "use client";
 
 import { Switch } from "@/components/ui/switch";
+import { pricingPlans } from "@/config/pricing";
+
+function getMinYearlyDiscountPercent() {
+  const discounts = pricingPlans
+    .filter((plan) => plan.monthlyPrice !== null && plan.yearlyPrice !== null)
+    .map((plan) => {
+      const monthly = plan.monthlyPrice as number;
+      const yearly = plan.yearlyPrice as number;
+      return ((monthly - yearly) / monthly) * 100;
+    });
+
+  return Math.floor(Math.min(...discounts));
+}
 
 type BillingToggleProps = {
   yearly: boolean;
@@ -8,6 +21,8 @@ type BillingToggleProps = {
 };
 
 export function BillingToggle({ yearly, onChange }: BillingToggleProps) {
+  const minDiscountPercent = getMinYearlyDiscountPercent();
+
   return (
     <div className="flex items-center justify-center gap-3">
       <span
@@ -29,7 +44,7 @@ export function BillingToggle({ yearly, onChange }: BillingToggleProps) {
       >
         Yearly
         <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
-          Save 20%
+          Save {minDiscountPercent}%+
         </span>
       </span>
     </div>

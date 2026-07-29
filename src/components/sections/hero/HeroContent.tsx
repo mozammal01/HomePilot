@@ -5,6 +5,11 @@ import { motion, type Variants } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { HeroButtons } from "@/components/sections/hero/HeroButtons";
 import { TrustBadges } from "@/components/sections/hero/TrustBadges";
+import {
+  EASE_OUT,
+  createFadeUpVariants,
+  createStaggerContainer,
+} from "@/lib/motion";
 
 type HeadlineLine = {
   words: string[];
@@ -17,21 +22,8 @@ const headline: HeadlineLine[] = [
   { words: ["and", "Stress-Free."], gradient: true },
 ];
 
-const container: Variants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.09, delayChildren: 0.15 },
-  },
-};
-
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 18 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
-  },
-};
+const container = createStaggerContainer(0.09, 0.15);
+const fadeUp = createFadeUpVariants();
 
 const wordVariants: Variants = {
   hidden: { opacity: 0, y: 24, filter: "blur(8px)" },
@@ -39,7 +31,7 @@ const wordVariants: Variants = {
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.6, ease: EASE_OUT },
   },
 };
 
@@ -64,7 +56,7 @@ export function HeroContent() {
             />
             <span className="relative inline-flex size-1.5 rounded-full bg-emerald-500" />
           </span>
-          Trusted by 10,000+ Property Managers
+          Built for Modern Property Teams
         </Badge>
       </motion.div>
 

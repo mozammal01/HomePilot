@@ -4,6 +4,8 @@ import { motion, useTransform, type MotionValue } from "framer-motion";
 import { Bell, CalendarClock, Wrench } from "lucide-react";
 import type { ComponentType } from "react";
 
+import { EASE_OUT } from "@/lib/motion";
+
 type FloatingCardsProps = {
   parallaxX: MotionValue<number>;
   parallaxY: MotionValue<number>;
@@ -72,7 +74,7 @@ function FloatingCard({
       transition={{
         duration: 0.7,
         delay: 0.9 + floatDelay,
-        ease: [0.16, 1, 0.3, 1],
+        ease: EASE_OUT,
       }}
     >
       <motion.div

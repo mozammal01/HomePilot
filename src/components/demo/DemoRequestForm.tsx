@@ -7,8 +7,9 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
+import { FormField } from "@/components/ui/form-field";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { EASE_OUT } from "@/lib/motion";
 import {
   demoRequestSchema,
   type DemoRequestValues,
@@ -40,7 +41,7 @@ export function DemoRequestForm() {
             aria-live="polite"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.4, ease: EASE_OUT }}
             className="flex flex-col items-center gap-4 py-10 text-center"
           >
             <span className="flex size-14 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
@@ -51,8 +52,8 @@ export function DemoRequestForm() {
                 Request received
               </h2>
               <p className="mt-1.5 text-sm text-muted-foreground">
-                A member of our team will reach out within one business day
-                to find a time that works for you.
+                This is a demo — no request was actually sent, but in a live
+                deployment our team would follow up within one business day.
               </p>
             </div>
           </motion.div>
@@ -67,77 +68,35 @@ export function DemoRequestForm() {
             className="flex flex-col gap-5"
           >
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-              <div className="flex flex-col gap-1.5">
-                <Label htmlFor="demo-name">Name</Label>
-                <Input
-                  id="demo-name"
-                  autoComplete="name"
-                  aria-invalid={!!errors.name}
-                  aria-describedby={errors.name ? "demo-name-error" : undefined}
-                  className="h-11"
-                  {...register("name")}
-                />
-                {errors.name && (
-                  <p id="demo-name-error" className="text-xs text-destructive">
-                    {errors.name.message}
-                  </p>
-                )}
-              </div>
+              <FormField id="demo-name" label="Name" error={errors.name?.message}>
+                <Input autoComplete="name" className="h-11" {...register("name")} />
+              </FormField>
 
-              <div className="flex flex-col gap-1.5">
-                <Label htmlFor="demo-email">Work email</Label>
+              <FormField id="demo-email" label="Work email" error={errors.email?.message}>
                 <Input
-                  id="demo-email"
                   type="email"
                   autoComplete="email"
-                  aria-invalid={!!errors.email}
-                  aria-describedby={errors.email ? "demo-email-error" : undefined}
                   className="h-11"
                   {...register("email")}
                 />
-                {errors.email && (
-                  <p id="demo-email-error" className="text-xs text-destructive">
-                    {errors.email.message}
-                  </p>
-                )}
-              </div>
+              </FormField>
             </div>
 
-            <div className="flex flex-col gap-1.5">
-              <Label htmlFor="demo-company">Company</Label>
-              <Input
-                id="demo-company"
-                autoComplete="organization"
-                aria-invalid={!!errors.company}
-                aria-describedby={errors.company ? "demo-company-error" : undefined}
-                className="h-11"
-                {...register("company")}
-              />
-              {errors.company && (
-                <p id="demo-company-error" className="text-xs text-destructive">
-                  {errors.company.message}
-                </p>
-              )}
-            </div>
+            <FormField id="demo-company" label="Company" error={errors.company?.message}>
+              <Input autoComplete="organization" className="h-11" {...register("company")} />
+            </FormField>
 
-            <div className="flex flex-col gap-1.5">
-              <Label htmlFor="demo-portfolio-size">Portfolio size</Label>
+            <FormField
+              id="demo-portfolio-size"
+              label="Portfolio size"
+              error={errors.portfolioSize?.message}
+            >
               <Input
-                id="demo-portfolio-size"
                 placeholder="e.g. 50 units across 3 properties"
-                aria-invalid={!!errors.portfolioSize}
-                aria-describedby={
-                  errors.portfolioSize ? "demo-portfolio-size-error" : undefined
-                }
                 className="h-11"
                 {...register("portfolioSize")}
               />
-              {errors.portfolioSize && (
-                <p id="demo-portfolio-size-error" className="text-xs text-destructive">
-                  {errors.portfolioSize.message}
-                </p>
-              )}
-            </div>
+            </FormField>
 
             <Button
               type="submit"

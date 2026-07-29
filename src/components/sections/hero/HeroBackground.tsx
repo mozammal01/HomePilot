@@ -1,24 +1,12 @@
 "use client";
 
-import { motion, useInView, useReducedMotion } from "framer-motion";
-import type { CSSProperties } from "react";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 
-const gridStyle: CSSProperties = {
-  backgroundImage:
-    "linear-gradient(to right, color-mix(in srgb, var(--foreground) 7%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in srgb, var(--foreground) 7%, transparent) 1px, transparent 1px)",
-  backgroundSize: "64px 64px",
-  maskImage:
-    "radial-gradient(ellipse 70% 60% at 50% 0%, black 40%, transparent 100%)",
-  WebkitMaskImage:
-    "radial-gradient(ellipse 70% 60% at 50% 0%, black 40%, transparent 100%)",
-};
+import { GridPattern } from "@/components/sections/shared/GridPattern";
+import { useAmbientReveal } from "@/hooks/use-ambient-reveal";
 
 export function HeroBackground() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { amount: 0.1 });
-  const prefersReducedMotion = useReducedMotion();
-  const shouldAnimate = isInView && !prefersReducedMotion;
+  const { ref, shouldAnimate } = useAmbientReveal<HTMLDivElement>();
 
   return (
     <div
@@ -26,8 +14,10 @@ export function HeroBackground() {
       aria-hidden="true"
       className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
     >
-      {/* base grid */}
-      <div className="absolute inset-0" style={gridStyle} />
+      <GridPattern
+        lineOpacity={0.07}
+        mask="radial-gradient(ellipse 70% 60% at 50% 0%, black 40%, transparent 100%)"
+      />
 
       {/* aurora blobs */}
       <motion.div

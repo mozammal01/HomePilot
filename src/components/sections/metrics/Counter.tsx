@@ -3,6 +3,8 @@
 import { animate, useInView, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
+import { EASE_OUT } from "@/lib/motion";
+
 export function formatCounterValue(value: number, decimals = 0): string {
   return decimals > 0
     ? value.toFixed(decimals)
@@ -44,7 +46,7 @@ export function Counter({
 
     const controls = animate(0, value, {
       duration,
-      ease: [0.16, 1, 0.3, 1],
+      ease: EASE_OUT,
       onUpdate: (latest) => setDisplay(latest),
     });
 

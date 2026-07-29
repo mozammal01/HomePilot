@@ -1,26 +1,16 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowRight, CalendarClock } from "lucide-react";
 import Link from "next/link";
 
 import { CTABackground } from "@/components/sections/cta/CTABackground";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
+import { createFadeUpVariants, createStaggerContainer } from "@/lib/motion";
 
-const container: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
-};
-
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
-  },
-};
+const container = createStaggerContainer(0.1, 0.1);
+const fadeUp = createFadeUpVariants(20);
 
 export function CTA() {
   return (

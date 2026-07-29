@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion, type Variants } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Check } from "lucide-react";
 import Link from "next/link";
 
@@ -8,15 +8,9 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getAccentColor } from "@/components/sections/shared/gradients";
 import { useSmoothNavClick } from "@/hooks/use-smooth-nav-click";
+import { EASE_OUT, createFadeUpVariants } from "@/lib/motion";
 
-export const pricingItemVariants: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
-  },
-};
+const itemVariants = createFadeUpVariants(24);
 
 export type PricingPlan = {
   name: string;
@@ -43,9 +37,9 @@ export function PricingCard({ plan, yearly, index }: PricingCardProps) {
 
   return (
     <motion.li
-      variants={pricingItemVariants}
+      variants={itemVariants}
       whileHover={{ y: -6 }}
-      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.3, ease: EASE_OUT }}
       className={`group relative list-none rounded-3xl p-px ${
         plan.recommended ? "lg:-my-4" : ""
       }`}
@@ -95,7 +89,7 @@ export function PricingCard({ plan, yearly, index }: PricingCardProps) {
                   initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -6 }}
-                  transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.25, ease: EASE_OUT }}
                   className="font-display text-4xl font-semibold tracking-tight text-foreground"
                 >
                   {price}

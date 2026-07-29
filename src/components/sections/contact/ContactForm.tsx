@@ -7,9 +7,10 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
+import { FormField } from "@/components/ui/form-field";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { EASE_OUT } from "@/lib/motion";
 import {
   contactFormSchema,
   type ContactFormValues,
@@ -48,13 +49,13 @@ export function ContactForm() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.4, ease: EASE_OUT }}
             className="flex flex-col items-center gap-4 py-10 text-center"
           >
             <motion.span
               initial={{ scale: 0.6, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.5, ease: EASE_OUT }}
               className="flex size-14 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
             >
               <CheckCircle2 className="size-7" aria-hidden="true" />
@@ -64,8 +65,8 @@ export function ContactForm() {
                 Message sent
               </h3>
               <p className="mt-1.5 text-sm text-muted-foreground">
-                Thanks for reaching out — our team will get back to you within
-                one business day.
+                This is a demo — no message was actually sent, but in a live
+                deployment our team would reply within one business day.
               </p>
             </div>
             <Button
@@ -89,86 +90,33 @@ export function ContactForm() {
             className="flex flex-col gap-5"
           >
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-              <div className="flex flex-col gap-1.5">
-                <Label htmlFor="contact-name">Name</Label>
-                <Input
-                  id="contact-name"
-                  autoComplete="name"
-                  aria-invalid={!!errors.name}
-                  aria-describedby={errors.name ? "contact-name-error" : undefined}
-                  className="h-11"
-                  {...register("name")}
-                />
-                {errors.name && (
-                  <p id="contact-name-error" className="text-xs text-destructive">
-                    {errors.name.message}
-                  </p>
-                )}
-              </div>
+              <FormField id="contact-name" label="Name" error={errors.name?.message}>
+                <Input autoComplete="name" className="h-11" {...register("name")} />
+              </FormField>
 
-              <div className="flex flex-col gap-1.5">
-                <Label htmlFor="contact-email">Email</Label>
+              <FormField id="contact-email" label="Email" error={errors.email?.message}>
                 <Input
-                  id="contact-email"
                   type="email"
                   autoComplete="email"
-                  aria-invalid={!!errors.email}
-                  aria-describedby={errors.email ? "contact-email-error" : undefined}
                   className="h-11"
                   {...register("email")}
                 />
-                {errors.email && (
-                  <p id="contact-email-error" className="text-xs text-destructive">
-                    {errors.email.message}
-                  </p>
-                )}
-              </div>
+              </FormField>
             </div>
 
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-              <div className="flex flex-col gap-1.5">
-                <Label htmlFor="contact-company">
-                  Company{" "}
-                  <span className="font-normal text-muted-foreground">(optional)</span>
-                </Label>
-                <Input
-                  id="contact-company"
-                  autoComplete="organization"
-                  className="h-11"
-                  {...register("company")}
-                />
-              </div>
+              <FormField id="contact-company" label="Company" optional>
+                <Input autoComplete="organization" className="h-11" {...register("company")} />
+              </FormField>
 
-              <div className="flex flex-col gap-1.5">
-                <Label htmlFor="contact-phone">
-                  Phone{" "}
-                  <span className="font-normal text-muted-foreground">(optional)</span>
-                </Label>
-                <Input
-                  id="contact-phone"
-                  type="tel"
-                  autoComplete="tel"
-                  className="h-11"
-                  {...register("phone")}
-                />
-              </div>
+              <FormField id="contact-phone" label="Phone" optional>
+                <Input type="tel" autoComplete="tel" className="h-11" {...register("phone")} />
+              </FormField>
             </div>
 
-            <div className="flex flex-col gap-1.5">
-              <Label htmlFor="contact-message">Message</Label>
-              <Textarea
-                id="contact-message"
-                rows={5}
-                aria-invalid={!!errors.message}
-                aria-describedby={errors.message ? "contact-message-error" : undefined}
-                {...register("message")}
-              />
-              {errors.message && (
-                <p id="contact-message-error" className="text-xs text-destructive">
-                  {errors.message.message}
-                </p>
-              )}
-            </div>
+            <FormField id="contact-message" label="Message" error={errors.message?.message}>
+              <Textarea rows={5} {...register("message")} />
+            </FormField>
 
             <Button
               type="submit"

@@ -3,7 +3,10 @@
 import { motion } from "framer-motion";
 import { TrendingUp, type LucideIcon } from "lucide-react";
 
+import { dashboardMiniCardClassName } from "@/components/sections/dashboard/DashboardMiniCard";
 import { getAccentColor } from "@/components/sections/shared/gradients";
+import { EASE_OUT } from "@/lib/motion";
+import { cn } from "@/lib/utils";
 
 type AnalyticsCardProps = {
   icon: LucideIcon;
@@ -25,8 +28,8 @@ export function AnalyticsCard({
   return (
     <motion.div
       whileHover={{ y: -3 }}
-      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-      className="flex flex-col gap-3 rounded-2xl border border-border/60 bg-background/60 p-4 transition-colors duration-300 hover:border-foreground/15 sm:p-5"
+      transition={{ duration: 0.25, ease: EASE_OUT }}
+      className={cn("flex flex-col gap-3", dashboardMiniCardClassName)}
     >
       <span
         className="flex size-9 items-center justify-center rounded-xl bg-foreground/5"

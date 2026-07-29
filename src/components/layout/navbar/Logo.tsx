@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import { siteConfig } from "@/config/site";
 import { useSmoothNavClick } from "@/hooks/use-smooth-nav-click";
+import { EASE_OUT } from "@/lib/motion";
 
 export function Logo() {
   const handleClick = useSmoothNavClick();
@@ -21,7 +22,7 @@ export function Logo() {
         animate={{ opacity: 1, scale: 1 }}
         whileHover={{ scale: 1.04 }}
         whileTap={{ scale: 0.97 }}
-        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.4, ease: EASE_OUT }}
         className="flex items-center gap-2.5"
       >
         <span className="flex size-8 items-center justify-center rounded-xl bg-foreground text-background">

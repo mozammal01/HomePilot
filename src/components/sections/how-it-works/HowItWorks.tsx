@@ -67,7 +67,7 @@ export function HowItWorks() {
           headingId="how-it-works-heading"
           badge="How It Works"
           headline="From Sign-Up to Fully Automated in Six Steps"
-          description="A guided path that takes you from exploring the platform to running your entire portfolio on autopilot — click any step to learn more."
+          description="A guided path that takes you from exploring the platform to running your entire portfolio on autopilot."
         />
 
         <div className="mt-12 sm:mt-16">

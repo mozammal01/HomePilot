@@ -1,4 +1,4 @@
-import { Bricolage_Grotesque, Geist_Mono, Inter } from "next/font/google";
+import { Bricolage_Grotesque, Inter } from "next/font/google";
 
 export const fontSans = Inter({
   variable: "--font-sans",
@@ -12,10 +12,4 @@ export const fontDisplay = Bricolage_Grotesque({
   display: "swap",
 });
 
-export const fontMono = Geist_Mono({
-  variable: "--font-mono",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-export const fontVariables = `${fontSans.variable} ${fontDisplay.variable} ${fontMono.variable}`;
+export const fontVariables = `${fontSans.variable} ${fontDisplay.variable}`;

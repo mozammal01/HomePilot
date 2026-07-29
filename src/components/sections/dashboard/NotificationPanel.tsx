@@ -3,6 +3,8 @@
 import { Bell, CreditCard, MessageCircle, Wrench, type LucideIcon } from "lucide-react";
 import { useId, useState } from "react";
 
+import { DashboardMiniCard } from "@/components/sections/dashboard/DashboardMiniCard";
+
 type Notification = {
   icon: LucideIcon;
   title: string;
@@ -39,7 +41,7 @@ export function NotificationPanel() {
   const rest = notifications.slice(3);
 
   return (
-    <div className="flex flex-col gap-4 rounded-2xl border border-border/60 bg-background/60 p-4 transition-colors duration-300 hover:border-foreground/15 sm:p-5">
+    <DashboardMiniCard className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
         <p className="text-xs font-medium text-muted-foreground">
           Notifications
@@ -75,10 +77,10 @@ export function NotificationPanel() {
         aria-expanded={expanded}
         aria-controls={listId}
         onClick={() => setExpanded((value) => !value)}
-        className="text-left text-xs font-medium text-foreground/80 underline-offset-4 hover:text-foreground hover:underline"
+        className="rounded-sm text-left text-xs font-medium text-foreground/80 underline-offset-4 hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
       >
         {expanded ? "Show less" : `View all (${notifications.length})`}
       </button>
-    </div>
+    </DashboardMiniCard>
   );
 }

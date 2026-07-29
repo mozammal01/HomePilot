@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
 
 import {
@@ -8,15 +8,9 @@ import {
   formatCounterValue,
 } from "@/components/sections/metrics/Counter";
 import { getAccentColor } from "@/components/sections/shared/gradients";
+import { EASE_OUT, createFadeUpVariants } from "@/lib/motion";
 
-export const metricItemVariants: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
-  },
-};
+const itemVariants = createFadeUpVariants(24);
 
 type MetricCardProps = {
   icon: LucideIcon;
@@ -42,9 +36,9 @@ export function MetricCard({
 
   return (
     <motion.li
-      variants={metricItemVariants}
+      variants={itemVariants}
       whileHover={{ y: -4 }}
-      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.3, ease: EASE_OUT }}
       className="group relative list-none overflow-hidden rounded-3xl border border-border/60 bg-card/60 p-6 shadow-xl backdrop-blur-xl transition-shadow duration-300 hover:shadow-2xl sm:p-7"
     >
       {/* soft accent glow, revealed on hover */}
@@ -57,7 +51,7 @@ export function MetricCard({
       <motion.span
         aria-hidden="true"
         whileHover={{ scale: 1.08, rotate: -4 }}
-        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.3, ease: EASE_OUT }}
         className="flex size-11 items-center justify-center rounded-2xl bg-foreground/5 text-foreground"
         style={{ color: accent }}
       >

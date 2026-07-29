@@ -3,23 +3,22 @@
 import { motion, type Variants } from "framer-motion";
 import { Check } from "lucide-react";
 
+import { EASE_OUT, createStaggerContainer } from "@/lib/motion";
+
 const items = [
   "No Credit Card Required",
   "Free 14-Day Trial",
   "Cancel Anytime",
 ] as const;
 
-const container: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.08 } },
-};
+const container = createStaggerContainer(0.08, 0);
 
 const item: Variants = {
   hidden: { opacity: 0, y: 8 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.4, ease: EASE_OUT },
   },
 };
 

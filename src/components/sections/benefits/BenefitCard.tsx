@@ -1,18 +1,12 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
 
 import { getAccentColor } from "@/components/sections/shared/gradients";
+import { EASE_OUT, createFadeUpVariants } from "@/lib/motion";
 
-export const benefitItemVariants: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
-  },
-};
+const itemVariants = createFadeUpVariants(24);
 
 export type BenefitData = {
   icon: LucideIcon;
@@ -34,9 +28,9 @@ export function BenefitCard({
 
   return (
     <motion.li
-      variants={benefitItemVariants}
+      variants={itemVariants}
       whileHover={{ y: -8 }}
-      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.3, ease: EASE_OUT }}
       className="group relative list-none rounded-3xl p-px"
       style={{
         backgroundImage: `linear-gradient(135deg, color-mix(in srgb, ${accent} 45%, transparent), transparent 45%, color-mix(in srgb, ${accent} 25%, transparent))`,

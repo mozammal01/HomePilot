@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { Building2, CreditCard, UserCheck } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
+import { EASE_OUT } from "@/lib/motion";
+
 type WorkflowStep = {
   icon: LucideIcon;
   title: string;
@@ -49,7 +51,7 @@ export function FeatureIllustration() {
             transition={{
               duration: 0.6,
               delay: index * 0.15,
-              ease: [0.16, 1, 0.3, 1],
+              ease: EASE_OUT,
             }}
             className={index === 1 ? "sm:mt-8" : undefined}
           >

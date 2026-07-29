@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowRight, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 
@@ -8,22 +8,10 @@ import { Button } from "@/components/ui/button";
 import { FeatureHighlights } from "@/components/sections/features/FeatureHighlights";
 import { getAccentColor } from "@/components/sections/shared/gradients";
 import { siteConfig } from "@/config/site";
+import { createFadeUpVariants, createStaggerContainer } from "@/lib/motion";
 
-const container: Variants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
-  },
-};
-
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
-  },
-};
+const container = createStaggerContainer();
+const fadeUp = createFadeUpVariants(20);
 
 type FeatureContentProps = {
   icon: LucideIcon;
@@ -92,7 +80,7 @@ export function FeatureContent({
           className="group h-11 rounded-full border-border/80 bg-background/60 px-6 backdrop-blur-sm"
           render={<Link href={siteConfig.auth.getStarted} />}
         >
-          Learn More
+          Start Free Trial
           <ArrowRight
             className="size-4 transition-transform duration-300 group-hover:translate-x-1"
             aria-hidden="true"

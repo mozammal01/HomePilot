@@ -1,5 +1,7 @@
 import { Users } from "lucide-react";
 
+import { DashboardMiniCard } from "@/components/sections/dashboard/DashboardMiniCard";
+
 const stats = [
   { label: "Active Tenants", value: "1,284" },
   { label: "Lease Renewals", value: "18" },
@@ -10,7 +12,7 @@ const avatarColors = ["bg-violet-400", "bg-sky-400", "bg-amber-400", "bg-emerald
 
 export function TenantCard() {
   return (
-    <div className="flex flex-col gap-4 rounded-2xl border border-border/60 bg-background/60 p-4 transition-colors duration-300 hover:border-foreground/15 sm:p-5">
+    <DashboardMiniCard className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
         <p className="text-xs font-medium text-muted-foreground">
           Tenant Management
@@ -41,6 +43,6 @@ export function TenantCard() {
           +9
         </span>
       </div>
-    </div>
+    </DashboardMiniCard>
   );
 }

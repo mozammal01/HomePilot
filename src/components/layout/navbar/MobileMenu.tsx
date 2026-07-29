@@ -5,6 +5,7 @@ import { useEffect, useRef, type RefObject } from "react";
 
 import { CTAButtons } from "@/components/layout/navbar/CTAButtons";
 import { useSmoothNavClick } from "@/hooks/use-smooth-nav-click";
+import { EASE_OUT } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 import type { NavItem } from "@/types";
 
@@ -26,7 +27,7 @@ const panelVariants: Variants = {
     clipPath: "inset(0% 0% 0% 0%)",
     transition: {
       duration: 0.5,
-      ease: [0.16, 1, 0.3, 1],
+      ease: EASE_OUT,
       when: "beforeChildren",
       staggerChildren: 0.05,
       delayChildren: 0.1,
@@ -44,7 +45,7 @@ const itemVariants: Variants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.4, ease: EASE_OUT },
   },
 };
 

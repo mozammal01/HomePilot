@@ -1,15 +1,12 @@
 "use client";
 
-import { motion, useInView, useReducedMotion } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 
 import { SectionBackground } from "@/components/sections/shared/SectionBackground";
+import { useAmbientReveal } from "@/hooks/use-ambient-reveal";
 
 export function DashboardBackground() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { amount: 0.1 });
-  const prefersReducedMotion = useReducedMotion();
-  const shouldAnimate = isInView && !prefersReducedMotion;
+  const { ref, shouldAnimate } = useAmbientReveal<HTMLDivElement>();
 
   return (
     <>

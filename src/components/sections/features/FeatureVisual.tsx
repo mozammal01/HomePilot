@@ -15,6 +15,7 @@ import {
 import { useRef } from "react";
 
 import { getAccentColor } from "@/components/sections/shared/gradients";
+import { EASE_OUT } from "@/lib/motion";
 
 export type FeatureVisualVariant =
   | "property"
@@ -99,7 +100,7 @@ function MiniBars({ values }: { values: number[] }) {
           initial={{ scaleY: 0 }}
           whileInView={{ scaleY: 1 }}
           viewport={{ once: true, amount: 0.6 }}
-          transition={{ duration: 0.5, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.5, delay: i * 0.05, ease: EASE_OUT }}
         />
       ))}
     </div>
@@ -375,7 +376,7 @@ export function FeatureVisual({ variant, align, index, label }: FeatureVisualPro
         initial={{ opacity: 0, x: align === "left" ? -48 : 48 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.7, ease: EASE_OUT }}
       >
         <motion.div
           animate={{ y: [0, -12, 0] }}

@@ -13,6 +13,7 @@ import { siteConfig } from "@/config/site";
 import { useActiveSection } from "@/hooks/use-active-section";
 import { useLockBodyScroll } from "@/hooks/use-lock-body-scroll";
 import { useScrolled } from "@/hooks/use-scrolled";
+import { EASE_OUT } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 const navHrefs = siteConfig.nav.map((item) => item.href);
@@ -29,7 +30,7 @@ export function Navbar() {
     <motion.header
       initial={{ y: -32, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.7, ease: EASE_OUT }}
       className="fixed inset-x-0 top-0 z-50"
     >
       <div

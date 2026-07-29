@@ -1,9 +1,10 @@
 "use client";
 
+import { IllustrativeDataNote } from "@/components/sections/shared/IllustrativeDataNote";
+import { SectionBackground } from "@/components/sections/shared/SectionBackground";
+import { SectionHeader } from "@/components/sections/shared/SectionHeader";
 import type { TestimonialData } from "@/components/sections/testimonials/TestimonialCard";
 import { TestimonialCarousel } from "@/components/sections/testimonials/TestimonialCarousel";
-import { SectionHeader } from "@/components/sections/shared/SectionHeader";
-import { SectionBackground } from "@/components/sections/shared/SectionBackground";
 
 const testimonials: TestimonialData[] = [
   {
@@ -82,12 +83,17 @@ export function Testimonials() {
           headingId="testimonials-heading"
           badge="Testimonials"
           headline="Loved by Property Teams Everywhere"
-          description="Don't just take our word for it — here's what property managers and owners say after switching to HomePilot."
+          description="A preview of the kind of feedback HomePilot is designed to earn from property managers and owners."
         />
 
         <div className="mt-12 sm:mt-16">
           <TestimonialCarousel testimonials={testimonials} />
         </div>
+
+        <IllustrativeDataNote>
+          Testimonials are illustrative examples written for demonstration —
+          not real HomePilot customers.
+        </IllustrativeDataNote>
       </div>
     </section>
   );

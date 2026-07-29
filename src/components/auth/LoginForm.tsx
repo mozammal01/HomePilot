@@ -5,6 +5,7 @@ import { Loader2, LogIn } from "lucide-react";
 import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
+import { FormField } from "@/components/ui/form-field";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { loginSchema, type LoginValues } from "@/lib/validations/auth";
@@ -34,23 +35,9 @@ export function LoginForm() {
 
   return (
     <form noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
-      <div className="flex flex-col gap-1.5">
-        <Label htmlFor="login-email">Email</Label>
-        <Input
-          id="login-email"
-          type="email"
-          autoComplete="email"
-          aria-invalid={!!errors.email}
-          aria-describedby={errors.email ? "login-email-error" : undefined}
-          className="h-11"
-          {...register("email")}
-        />
-        {errors.email && (
-          <p id="login-email-error" className="text-xs text-destructive">
-            {errors.email.message}
-          </p>
-        )}
-      </div>
+      <FormField id="login-email" label="Email" error={errors.email?.message}>
+        <Input type="email" autoComplete="email" className="h-11" {...register("email")} />
+      </FormField>
 
       <div className="flex flex-col gap-1.5">
         <div className="flex items-center justify-between">

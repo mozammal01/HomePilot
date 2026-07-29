@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/accordion";
 import { SectionHeader } from "@/components/sections/shared/SectionHeader";
 import { SectionBackground } from "@/components/sections/shared/SectionBackground";
+import { EASE_OUT } from "@/lib/motion";
 
 const faqs = [
   {
@@ -30,7 +31,7 @@ const faqs = [
   {
     question: "Is online rent collection secure?",
     answer:
-      "Absolutely. All payments are processed through PCI-compliant, bank-level encrypted infrastructure. HomePilot never stores raw card or bank account numbers on our servers.",
+      "That's the design goal: in a production deployment, payments would be processed through PCI-compliant, bank-level encrypted infrastructure, with HomePilot never storing raw card or bank account numbers on its own servers.",
   },
   {
     question: "Do tenants need to download an app?",
@@ -45,7 +46,7 @@ const faqs = [
   {
     question: "Does HomePilot integrate with my accounting software?",
     answer:
-      "HomePilot integrates with popular accounting tools like QuickBooks and Xero, plus a REST API on Professional and Enterprise plans for custom integrations with your existing stack.",
+      "The roadmap includes integrations with popular accounting tools like QuickBooks and Xero, plus a REST API on Professional and Enterprise plans for custom integrations with your existing stack.",
   },
   {
     question: "Is there a free trial?",
@@ -80,7 +81,7 @@ export function Faq() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.6, ease: EASE_OUT }}
           className="mx-auto mt-12 max-w-3xl rounded-3xl border border-border/60 bg-card/60 p-2 shadow-lg backdrop-blur-xl sm:mt-16 sm:p-4"
         >
           <Accordion className="px-2 sm:px-4">

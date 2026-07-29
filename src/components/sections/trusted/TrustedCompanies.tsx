@@ -1,9 +1,11 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
 
+import { IllustrativeDataNote } from "@/components/sections/shared/IllustrativeDataNote";
 import { SectionBackground } from "@/components/sections/shared/SectionBackground";
 import { CompanyLogo } from "@/components/sections/trusted/CompanyLogo";
+import { createFadeUpVariants, createStaggerContainer } from "@/lib/motion";
 
 const companies = [
   "UrbanNest",
@@ -16,21 +18,8 @@ const companies = [
   "Vertex Realty",
 ] as const;
 
-const container: Variants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.06, delayChildren: 0.1 },
-  },
-};
-
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 18 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
-  },
-};
+const container = createStaggerContainer(0.06, 0.1);
+const fadeUp = createFadeUpVariants();
 
 export function TrustedCompanies() {
   return (
@@ -59,8 +48,8 @@ export function TrustedCompanies() {
             variants={fadeUp}
             className="text-balance text-base leading-relaxed text-muted-foreground"
           >
-            Join thousands of landlords, agencies, and property managers who
-            trust HomePilot to manage their business efficiently.
+            Built for the landlords, agencies, and property managers who need
+            to run their business efficiently, at any scale.
           </motion.p>
         </motion.div>
 
@@ -76,6 +65,11 @@ export function TrustedCompanies() {
             <CompanyLogo key={name} name={name} index={index} />
           ))}
         </motion.ul>
+
+        <IllustrativeDataNote>
+          Company names shown are illustrative examples for demonstration —
+          not real HomePilot customers.
+        </IllustrativeDataNote>
       </div>
     </section>
   );

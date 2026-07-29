@@ -1,5 +1,7 @@
 import { CalendarClock } from "lucide-react";
 
+import { DashboardMiniCard } from "@/components/sections/dashboard/DashboardMiniCard";
+
 const days = ["S", "M", "T", "W", "T", "F", "S"];
 const activeDay = 3;
 const eventDays = [1, 3, 5];
@@ -12,7 +14,7 @@ const events = [
 
 export function CalendarWidget() {
   return (
-    <div className="flex flex-col gap-4 rounded-2xl border border-border/60 bg-background/60 p-4 transition-colors duration-300 hover:border-foreground/15 sm:p-5">
+    <DashboardMiniCard className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
         <p className="text-xs font-medium text-muted-foreground">Calendar</p>
         <CalendarClock className="size-4 text-muted-foreground" aria-hidden="true" />
@@ -54,6 +56,6 @@ export function CalendarWidget() {
           </div>
         ))}
       </div>
-    </div>
+    </DashboardMiniCard>
   );
 }

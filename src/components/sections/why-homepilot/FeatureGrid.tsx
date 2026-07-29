@@ -1,9 +1,10 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
 
 import { FeatureCard } from "@/components/sections/why-homepilot/FeatureCard";
+import { createStaggerContainer } from "@/lib/motion";
 
 export type Feature = {
   icon: LucideIcon;
@@ -11,12 +12,7 @@ export type Feature = {
   description: string;
 };
 
-const container: Variants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
-  },
-};
+const container = createStaggerContainer();
 
 type FeatureGridProps = {
   features: Feature[];

@@ -1,6 +1,20 @@
+import { pricingPlans } from "@/config/pricing";
 import { siteConfig } from "@/config/site";
 
+function getPriceRange() {
+  const prices = pricingPlans
+    .flatMap((plan) => [plan.monthlyPrice, plan.yearlyPrice])
+    .filter((price): price is number => price !== null);
+
+  return {
+    lowPrice: Math.min(...prices).toString(),
+    highPrice: Math.max(...prices).toString(),
+  };
+}
+
 export function StructuredData() {
+  const { lowPrice, highPrice } = getPriceRange();
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -29,8 +43,9 @@ export function StructuredData() {
         offers: {
           "@type": "AggregateOffer",
           priceCurrency: "USD",
-          lowPrice: "0",
-          offerCount: "3",
+          lowPrice,
+          highPrice,
+          offerCount: pricingPlans.length.toString(),
         },
       },
     ],

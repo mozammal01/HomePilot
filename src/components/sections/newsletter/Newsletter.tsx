@@ -1,24 +1,14 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
 
 import { NewsletterForm } from "@/components/sections/newsletter/NewsletterForm";
 import { getAccentColor } from "@/components/sections/shared/gradients";
+import { createFadeUpVariants, createStaggerContainer } from "@/lib/motion";
 
-const container: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
-};
-
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 18 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
-  },
-};
+const container = createStaggerContainer();
+const fadeUp = createFadeUpVariants();
 
 export function Newsletter() {
   const accent = getAccentColor(1);

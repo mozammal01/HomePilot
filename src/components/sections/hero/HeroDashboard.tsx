@@ -11,6 +11,7 @@ import { TrendingUp, Users } from "lucide-react";
 import type { PointerEvent } from "react";
 
 import { FloatingCards } from "@/components/sections/hero/FloatingCards";
+import { EASE_OUT } from "@/lib/motion";
 
 const revenueSpark = [40, 55, 48, 62, 58, 72, 68, 84];
 const paymentBars = [55, 72, 48, 90, 64, 100, 78];
@@ -21,7 +22,7 @@ const container: Variants = {
     opacity: 1,
     scale: 1,
     y: 0,
-    transition: { duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.8, delay: 0.3, ease: EASE_OUT },
   },
 };
 
@@ -170,7 +171,7 @@ export function HeroDashboard() {
                       transition={{
                         duration: 1.2,
                         delay: 0.8,
-                        ease: [0.16, 1, 0.3, 1],
+                        ease: EASE_OUT,
                       }}
                     />
                   </div>
@@ -216,7 +217,7 @@ export function HeroDashboard() {
                     transition={{
                       duration: 0.5,
                       delay: 1 + i * 0.06,
-                      ease: [0.16, 1, 0.3, 1],
+                      ease: EASE_OUT,
                     }}
                   />
                 ))}

@@ -28,6 +28,7 @@ import { PaymentCard } from "@/components/sections/dashboard/PaymentCard";
 import { PropertyCard } from "@/components/sections/dashboard/PropertyCard";
 import { RevenueChart } from "@/components/sections/dashboard/RevenueChart";
 import { TenantCard } from "@/components/sections/dashboard/TenantCard";
+import { EASE_OUT } from "@/lib/motion";
 
 type FloatingToastData = {
   icon: LucideIcon;
@@ -73,7 +74,7 @@ function FloatingToast({
       transition={{
         duration: 0.6,
         delay: 0.5 + floatDelay,
-        ease: [0.16, 1, 0.3, 1],
+        ease: EASE_OUT,
       }}
       aria-hidden="true"
       className={`absolute z-20 hidden sm:block ${className}`}
@@ -142,7 +143,7 @@ export function DashboardWindow() {
         initial={{ opacity: 0, scale: 0.94, y: 32 }}
         whileInView={{ opacity: 1, scale: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.8, ease: EASE_OUT }}
       >
         <motion.div
           onPointerMove={handlePointerMove}
@@ -202,45 +203,49 @@ export function DashboardWindow() {
                 </div>
               </div>
 
-              <RevenueChart />
+              {/* Below sm: fits in a fixed-height scrollable frame like a real app
+                  window, instead of stretching the whole page. */}
+              <div className="-mx-1 flex max-h-104 flex-col gap-4 overflow-y-auto px-1 sm:max-h-none sm:overflow-visible">
+                <RevenueChart />
 
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
-                <PropertyCard />
-                <TenantCard />
-              </div>
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
+                  <PropertyCard />
+                  <TenantCard />
+                </div>
 
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
-                <MaintenanceCard />
-                <PaymentCard />
-              </div>
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
+                  <MaintenanceCard />
+                  <PaymentCard />
+                </div>
 
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
-                <CalendarWidget />
-                <NotificationPanel />
-              </div>
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
+                  <CalendarWidget />
+                  <NotificationPanel />
+                </div>
 
-              <div className="grid grid-cols-1 gap-3 border-t border-border/60 pt-4 sm:grid-cols-3 sm:gap-4">
-                <AnalyticsCard
-                  icon={TrendingUp}
-                  label="Revenue Growth"
-                  value="+12.4%"
-                  trend="vs last quarter"
-                  accentIndex={0}
-                />
-                <AnalyticsCard
-                  icon={Building2}
-                  label="Occupancy Growth"
-                  value="+4.8%"
-                  trend="vs last quarter"
-                  accentIndex={2}
-                />
-                <AnalyticsCard
-                  icon={Heart}
-                  label="Satisfaction Score"
-                  value="4.9 / 5"
-                  trend="+0.3 pts"
-                  accentIndex={1}
-                />
+                <div className="grid grid-cols-1 gap-3 border-t border-border/60 pt-4 sm:grid-cols-3 sm:gap-4">
+                  <AnalyticsCard
+                    icon={TrendingUp}
+                    label="Revenue Growth"
+                    value="+12.4%"
+                    trend="vs last quarter"
+                    accentIndex={0}
+                  />
+                  <AnalyticsCard
+                    icon={Building2}
+                    label="Occupancy Growth"
+                    value="+4.8%"
+                    trend="vs last quarter"
+                    accentIndex={2}
+                  />
+                  <AnalyticsCard
+                    icon={Heart}
+                    label="Satisfaction Score"
+                    value="4.9 / 5"
+                    trend="+0.3 pts"
+                    accentIndex={1}
+                  />
+                </div>
               </div>
             </div>
           </motion.div>

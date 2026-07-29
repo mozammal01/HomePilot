@@ -1,18 +1,12 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import { useId } from "react";
 
 import { getAccentColor } from "@/components/sections/shared/gradients";
+import { EASE_OUT, createFadeUpVariants } from "@/lib/motion";
 
-export const logoItemVariants: Variants = {
-  hidden: { opacity: 0, y: 16 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
-  },
-};
+const itemVariants = createFadeUpVariants(16);
 
 type CompanyLogoProps = {
   name: string;
@@ -29,9 +23,9 @@ export function CompanyLogo({ name, index }: CompanyLogoProps) {
 
   return (
     <motion.li
-      variants={logoItemVariants}
+      variants={itemVariants}
       whileHover={{ scale: 1.06, y: -2 }}
-      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.3, ease: EASE_OUT }}
       className="group relative flex list-none items-center justify-center rounded-2xl border border-border/60 bg-card/40 px-5 py-6 backdrop-blur-sm sm:px-6"
     >
       {/* soft color glow, revealed on hover */}

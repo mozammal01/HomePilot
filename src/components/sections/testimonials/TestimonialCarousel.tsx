@@ -8,6 +8,7 @@ import {
   TestimonialCard,
   type TestimonialData,
 } from "@/components/sections/testimonials/TestimonialCard";
+import { EASE_OUT } from "@/lib/motion";
 
 type TestimonialCarouselProps = {
   testimonials: TestimonialData[];
@@ -70,7 +71,7 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
             initial="enter"
             animate="center"
             exit="exit"
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.5, ease: EASE_OUT }}
             className="absolute inset-0"
           >
             <TestimonialCard {...current} />
